@@ -1,0 +1,50 @@
+{
+  "version": "v3",
+  "crypto": {
+    "model": "Gradient Boosting",
+    "accuracy": 67.6,
+    "cv": 66.93,
+    "baseline": 49.97,
+    "edge": 17.63
+  },
+  "stocks": {
+    "model": "Gradient Boosting",
+    "accuracy": 60.72,
+    "cv": 60.75,
+    "baseline": 47.79,
+    "edge": 12.93,
+    "trained_on": "2026-06-09T19:02:30.208401"
+  },
+  "features": [
+    "ma5_cross",
+    "ma10_cross",
+    "ma20_cross",
+    "price_vs_ma20",
+    "price_vs_ma50",
+    "mom5",
+    "mom10",
+    "mom20",
+    "vol10",
+    "vol20",
+    "vol_ratio",
+    "rsi",
+    "macd_cross",
+    "macd_hist",
+    "bb_position",
+    "roc5",
+    "roc10",
+    "atr_pct",
+    "obv_pct",
+    "vol_trend",
+    "hl_position",
+    "score",
+    "vix",
+    "vix_high",
+    "spy_ret_1d",
+    "spy_ret_5d",
+    "spy_trend",
+    "btc_eth_ratio",
+    "rel_strength"
+  ],
+  "trained_on": "2026-06-09T19:02:30.208406"
+}

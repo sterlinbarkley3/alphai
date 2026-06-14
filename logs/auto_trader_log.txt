@@ -1,0 +1,247 @@
+
+=======================================================
+  STERLIN AI — AUTONOMOUS TRADER
+=======================================================
+  Cash: $10,000.00  Positions: 0  Fear&Greed: 12/100
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+=======================================================
+  STERLIN AI — AUTONOMOUS TRADER
+=======================================================
+  Cash: $10,000.00  Positions: 0  Fear&Greed: 12/100
+
+  1 actionable signals above 65% confidence
+
+
+  Executed 0 trades
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+=======================================================
+  STERLIN AI — AUTONOMOUS TRADER
+=======================================================
+  Cash: $10,000.00  Positions: 0  Fear&Greed: 12/100
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+=======================================================
+  STERLIN AI — AUTONOMOUS TRADER
+=======================================================
+  Cash: $10,000.00  Positions: 0  Fear&Greed: 12/100
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+=======================================================
+  STERLIN AI — AUTONOMOUS TRADER
+=======================================================
+  Cash: $10,000.00  Positions: 0  Fear&Greed: 8/100
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+╔══════════════════════════════════════════════════════╗
+║  ALPHAI TRADER — Jun 09 2026  10:00 PM             ║
+║  Project age: 7 days  (live since Jun 02, 2026)       ║
+╚══════════════════════════════════════════════════════╝
+
+  📅 Day 7 of operation  |  Market: EXTREME FEAR (9/100)
+  💵 Cash: $10,000.00  |  Positions: 0/5
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+╔══════════════════════════════════════════════════════╗
+║  ALPHAI TRADER — Jun 10 2026  10:00 PM             ║
+║  Project age: 8 days  (live since Jun 02, 2026)       ║
+╚══════════════════════════════════════════════════════╝
+
+  📅 Day 8 of operation  |  Market: EXTREME FEAR (12/100)
+  💵 Cash: $10,000.00  |  Positions: 0/5
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+╔══════════════════════════════════════════════════════╗
+║  ALPHAI TRADER — Jun 11 2026  10:00 PM             ║
+║  Project age: 9 days  (live since Jun 02, 2026)       ║
+╚══════════════════════════════════════════════════════╝
+
+  📅 Day 9 of operation  |  Market: EXTREME FEAR (12/100)
+  💵 Cash: $10,000.00  |  Positions: 0/5
+
+  1 actionable signals above 65% confidence
+
+
+  Executed 0 trades
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+╔══════════════════════════════════════════════════════╗
+║  ALPHAI TRADER — Jun 12 2026  10:00 PM             ║
+║  Project age: 10 days  (live since Jun 02, 2026)       ║
+╚══════════════════════════════════════════════════════╝
+
+  📅 Day 10 of operation  |  Market: EXTREME FEAR (13/100)
+  💵 Cash: $10,000.00  |  Positions: 0/5
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+
+
+╔══════════════════════════════════════════════════════╗
+║  ALPHAI TRADER — Jun 13 2026  10:00 PM             ║
+║  Project age: 11 days  (live since Jun 02, 2026)       ║
+╚══════════════════════════════════════════════════════╝
+
+  📅 Day 11 of operation  |  Market: EXTREME FEAR (18/100)
+  💵 Cash: $10,000.00  |  Positions: 0/5
+
+  0 actionable signals above 65% confidence
+
+  No trades executed — no signals above confidence threshold
+
+
+============================================================
+  AUTONOMOUS TRADER — PERFORMANCE REPORT
+============================================================
+  Starting cash:    $ 10,000.00
+  Current cash:     $ 10,000.00
+  Open positions:   $      0.00
+  Total value:      $ 10,000.00
+  Total return:          +0.00%
+
+  No open positions.
+============================================================
+

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sterlin's Trading Dashboard</title>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--surface3:#21262d;--border:#21262d;--border2:#30363d;--text:#e6edf3;--text-muted:#8b949e;--text-dim:#484f58;--green:#3fb950;--green-dim:#3fb95018;--red:#f85149;--red-dim:#f8514918;--yellow:#f9a825;--yellow-dim:#f9a82518;--blue:#58a6ff;--blue-dim:#58a6ff18;--font:'SF Mono','Fira Code','Cascadia Code',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-brand{display:flex;flex-direction:column;}
+.nav-title{font-size:15px;font-weight:700;color:#fff;letter-spacing:1px;}
+.nav-sub{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-top:1px;}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.live-pill{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border2);padding:5px 12px;border-radius:20px;font-size:10px;color:var(--text-muted);letter-spacing:1px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.nav-time{font-size:11px;color:var(--text-dim);}
+.wallet-btn{background:var(--blue-dim);border:1px solid var(--blue);color:var(--blue);padding:6px 16px;border-radius:6px;cursor:pointer;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:1px;transition:all 0.15s;}
+.wallet-btn:hover{background:var(--blue);color:#0d1117;}
+.main{max-width:1200px;margin:0 auto;padding:24px 20px;}
+.top-section{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.sentiment-card,.picks-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;}
+.sentiment-title,.picks-title{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:16px;}
+.sentiment-overall{font-size:28px;font-weight:700;margin-bottom:16px;}
+.sentiment-bars{display:flex;flex-direction:column;gap:8px;}
+.sent-row{display:flex;align-items:center;gap:10px;font-size:11px;}
+.sent-label{color:var(--text-muted);width:70px;}
+.sent-bar-bg{flex:1;height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.sent-bar-fill{height:100%;border-radius:2px;}
+.sent-num{color:var(--text-muted);width:20px;text-align:right;}
+.summary-pills{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.summary-pill{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;}
+.pick-card{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.pick-card:last-child{border-bottom:none;}
+.pick-rank{font-size:18px;font-weight:700;color:var(--text-dim);width:28px;}
+.pick-info{flex:1;display:flex;flex-direction:column;gap:2px;}
+.pick-symbol{font-size:15px;font-weight:700;color:#fff;}
+.pick-price{font-size:12px;color:var(--text-muted);}
+.pick-score{font-size:12px;font-weight:700;}
+.controls{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.filter-label{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-right:4px;}
+.filter-btn{background:var(--surface);border:1px solid var(--border2);color:var(--text-muted);padding:5px 14px;border-radius:6px;cursor:pointer;font-family:var(--font);font-size:10px;letter-spacing:1px;transition:all 0.15s;}
+.filter-btn:hover{border-color:var(--blue);color:var(--text);}
+.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#0d1117;font-weight:700;}
+.search-input{margin-left:auto;background:var(--surface);border:1px solid var(--border2);color:var(--text);padding:5px 14px;border-radius:6px;font-family:var(--font);font-size:11px;outline:none;width:180px;transition:border 0.15s;}
+.search-input:focus{border-color:var(--blue);}
+.search-input::placeholder{color:var(--text-dim);}
+.watchlist{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.watchlist-header{display:flex;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);font-size:10px;color:var(--text-dim);letter-spacing:2px;}
+.asset-row{display:flex;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);gap:12px;transition:background 0.1s;}
+.asset-row:last-child{border-bottom:none;}
+.asset-row:hover{background:var(--surface2);}
+.row-left{flex:1;display:flex;flex-direction:column;gap:3px;min-width:100px;cursor:pointer;}
+.row-symbol-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.row-symbol{font-size:15px;font-weight:700;color:#fff;}
+.row-type{font-size:8px;padding:2px 6px;border-radius:3px;letter-spacing:1px;}
+.type-crypto{background:var(--blue-dim);color:var(--blue);border:1px solid #58a6ff33;}
+.type-stock{background:#7c3aed18;color:#a78bfa;border:1px solid #7c3aed33;}
+.row-reason{font-size:10px;color:var(--text-dim);}
+.row-chart-wrap{width:90px;height:36px;cursor:pointer;}
+.sparkline{width:90px!important;height:36px!important;display:block;}
+.row-right{display:flex;align-items:center;gap:12px;}
+.row-price{font-size:14px;font-weight:700;color:#fff;}
+.row-change{font-size:11px;font-weight:600;}
+.row-signal{font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:1px;white-space:nowrap;}
+.trade-btns{display:flex;gap:6px;}
+.trade-btn{padding:5px 12px;border-radius:5px;font-family:var(--font);font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;border:1px solid;transition:all 0.15s;}
+.buy-btn{background:var(--green-dim);color:var(--green);border-color:var(--green);}
+.buy-btn:hover{background:var(--green);color:#0d1117;}
+.sell-btn{background:var(--red-dim);color:var(--red);border-color:var(--red);}
+.sell-btn:hover{background:var(--red);color:#fff;}
+.modal-overlay{display:none;position:fixed;inset:0;background:#00000099;z-index:200;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;width:100%;max-width:440px;position:relative;max-height:90vh;overflow-y:auto;}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text-muted);width:28px;height:28px;border-radius:6px;cursor:pointer;font-family:var(--font);font-size:14px;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{color:#fff;}
+.modal-symbol{font-size:26px;font-weight:700;color:#fff;}
+.modal-price{font-size:20px;color:var(--blue);margin-top:4px;}
+.modal-signal{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:5px;letter-spacing:1px;}
+.modal-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.modal-row:last-child{border-bottom:none;}
+.modal-label{color:var(--text-muted);}
+.modal-value{color:#fff;font-weight:600;}
+.trade-modal-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;}
+.trade-modal-price{font-size:13px;color:var(--text-muted);margin-bottom:20px;}
+.toggle-wrap{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:3px;margin-bottom:16px;}
+.toggle-opt{flex:1;padding:7px;text-align:center;border-radius:6px;font-family:var(--font);font-size:11px;letter-spacing:1px;cursor:pointer;color:var(--text-muted);border:none;background:none;transition:all 0.15s;}
+.toggle-opt.active{background:var(--surface3);color:#fff;font-weight:700;}
+.trade-input-wrap{margin-bottom:16px;}
+.trade-input-label{font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-bottom:6px;display:block;}
+.trade-input{width:100%;background:var(--surface2);border:1px solid var(--border2);color:#fff;padding:10px 14px;border-radius:8px;font-family:var(--font);font-size:14px;outline:none;transition:border 0.15s;}
+.trade-input:focus{border-color:var(--blue);}
+.trade-preview{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--text-muted);min-height:40px;}
+.trade-submit{width:100%;padding:12px;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer;border:none;transition:all 0.15s;}
+.trade-submit-buy{background:var(--green);color:#0d1117;}
+.trade-submit-buy:hover{background:#2ea043;}
+.trade-submit-sell{background:var(--red);color:#fff;}
+.trade-submit-sell:hover{background:#d93025;}
+.trade-result{margin-top:12px;padding:10px;border-radius:6px;font-size:12px;text-align:center;display:none;}
+.wallet-modal{max-width:560px;}
+.wallet-total{font-size:32px;font-weight:700;color:#fff;margin-bottom:4px;}
+.wallet-sub{font-size:13px;color:var(--text-muted);margin-bottom:20px;}
+.wallet-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;}
+.wallet-stat{background:var(--surface2);border-radius:8px;padding:10px 12px;}
+.wallet-stat-label{font-size:9px;color:var(--text-dim);letter-spacing:1px;margin-bottom:4px;}
+.wallet-stat-value{font-size:13px;font-weight:700;}
+.section-title{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:10px;margin-top:16px;}
+.pos-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.pos-row:last-child{border-bottom:none;}
+.pos-left{display:flex;flex-direction:column;gap:2px;}
+.pos-symbol{font-size:14px;font-weight:700;color:#fff;}
+.pos-qty{font-size:10px;color:var(--text-dim);}
+.pos-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.pos-value{font-size:13px;font-weight:700;color:#fff;}
+.pos-gl{font-size:11px;}
+.hist-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px;}
+.hist-row:last-child{border-bottom:none;}
+@media(max-width:700px){.top-section{grid-template-columns:1fr;}.nav-time{display:none;}.row-chart-wrap{display:none;}.trade-btns{flex-direction:column;gap:4px;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-brand">
+        <span class="nav-title">Sterlin's Trading Dashboard</span>
+        <span class="nav-sub">🤖 AI-POWERED · LIVE MARKET INTELLIGENCE</span>
+    </div>
+    <div class="nav-right">
+        <span class="nav-time">Jun 07, 2026  16:48:13</span>
+        <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+        <button class="wallet-btn" onclick="document.getElementById('wallet-modal').classList.add('open')">💼 WALLET</button>
+    </div>
+</nav>
+<div class="main">
+    <div class="top-section">
+        <div class="sentiment-card">
+            <div class="sentiment-title">MARKET SENTIMENT</div>
+            <div class="sentiment-overall" style="color:#f9a825">NEUTRAL</div>
+            <div class="sentiment-bars">
+                <div class="sent-row"><span class="sent-label">BULLISH</span><div class="sent-bar-bg"><div class="sent-bar-fill" style="width:0%;background:#3fb950"></div></div><span class="sent-num" style="color:#3fb950">0</span></div>
+                <div class="sent-row"><span class="sent-label">BEARISH</span><div class="sent-bar-bg"><div class="sent-bar-fill" style="width:0%;background:#f85149"></div></div><span class="sent-num" style="color:#f85149">0</span></div>
+                <div class="sent-row"><span class="sent-label">NEUTRAL</span><div class="sent-bar-bg"><div class="sent-bar-fill" style="width:100%;background:#f9a825"></div></div><span class="sent-num" style="color:#f9a825">22</span></div>
+            </div>
+            <div class="summary-pills">
+                <span class="summary-pill" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb95044">0 STRONG BUY</span>
+                <span class="summary-pill" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb95044">0 BUY</span>
+                <span class="summary-pill" style="background:#f9a82522;color:#f9a825;border:1px solid #f9a82544">22 HOLD</span>
+                <span class="summary-pill" style="background:#f8514922;color:#f85149;border:1px solid #f8514944">0 SELL</span>
+            </div>
+        </div>
+        <div class="picks-card">
+            <div class="picks-title">TODAY'S TOP OPPORTUNITIES</div>
+            
+        <div class="pick-card">
+            <div class="pick-rank">#1</div>
+            <div class="pick-info">
+                <span class="pick-symbol">BTC</span>
+                <span class="pick-price">$66,942.96</span>
+            </div>
+            <div class="pick-score" style="color:#3fb950">HOLD · AI 50.0%</div>
+        </div>
+        <div class="pick-card">
+            <div class="pick-rank">#2</div>
+            <div class="pick-info">
+                <span class="pick-symbol">XRP</span>
+                <span class="pick-price">$1.2293</span>
+            </div>
+            <div class="pick-score" style="color:#3fb950">HOLD · AI 50.0%</div>
+        </div>
+        <div class="pick-card">
+            <div class="pick-rank">#3</div>
+            <div class="pick-info">
+                <span class="pick-symbol">SOL</span>
+                <span class="pick-price">$74.8600</span>
+            </div>
+            <div class="pick-score" style="color:#3fb950">HOLD · AI 50.0%</div>
+        </div>
+        </div>
+    </div>
+    <div class="controls">
+        <span class="filter-label">FILTER</span>
+        <button class="filter-btn active" onclick="filterCards('all',this)">ALL</button>
+        <button class="filter-btn" onclick="filterCards('BUY',this)">BUY</button>
+        <button class="filter-btn" onclick="filterCards('SELL',this)">SELL</button>
+        <button class="filter-btn" onclick="filterCards('HOLD',this)">HOLD</button>
+        <button class="filter-btn" onclick="filterCards('crypto',this)">CRYPTO</button>
+        <button class="filter-btn" onclick="filterCards('stock',this)">STOCKS</button>
+        <input class="search-input" type="text" placeholder="Search symbol..." oninput="searchCards(this.value)">
+    </div>
+    <div class="watchlist">
+        <div class="watchlist-header"><span>ASSET</span><span>CHART</span><span>PRICE / ACTION</span></div>
+        <div id="rows">
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="BTC">
+            <div class="row-left" onclick="openModal('BTC',"$66,942.96","DOWN","100","MEDIUM","-3867.98","4080.32","-3.76","-10.02","-30.07","Strong downward trend","HOLD","0",66942.965)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">BTC</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('BTC',"$66,942.96","DOWN","100","MEDIUM","-3867.98","4080.32","-3.76","-10.02","-30.07","Strong downward trend","HOLD","0",66942.965)">
+                <canvas class="sparkline" id="spark_BTC" data-prices="[71080.515, 71080.515, 71080.515, 71080.515, 71080.515, 71080.515, 71080.515, 71159.985, 71188.545, 71189.355, 71200.145, 71194.325, 71248.595, 71188.265, 71196.495, 71215.935, 71190.675, 71221.535, 71189.4, 71158.015, 71167.865, 71228.635, 71259.475, 71271.515, 71232.375, 71216.395, 71212.005, 71223.275, 71196.005, 71217.385, 71219.955, 71182.225, 71200.085, 71196.515, 71161.8, 71192.945, 71151.695, 71128.675, 71059.065, 70941.26, 70957.985, 70925.995, 70887.955, 70823.325, 70785.965, 70696.03, 70739.415, 70785.995, 70833.975, 70805.995, 70889.005, 70848.985, 70821.005, 70683.675, 70775.245, 70810.945, 70795.905, 66877.665, 66926.885, 66942.965]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('BTC',"$66,942.96","DOWN","100","MEDIUM","-3867.98","4080.32","-3.76","-10.02","-30.07","Strong downward trend","HOLD","0",66942.965)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$66,942.96</span>
+                    <span class="row-change" style="color:#3fb950">▲0.02%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('BTC',66942.965,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('BTC',66942.965,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="XRP">
+            <div class="row-left" onclick="openModal('XRP',"$1.2293","DOWN","100","LOW","-0.05","0.06","-2.82","-7.51","-22.54","Strong downward trend","HOLD","0",1.2293)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">XRP</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('XRP',"$1.2293","DOWN","100","LOW","-0.05","0.06","-2.82","-7.51","-22.54","Strong downward trend","HOLD","0",1.2293)">
+                <canvas class="sparkline" id="spark_XRP" data-prices="[1.28875, 1.28875, 1.28875, 1.28875, 1.28875, 1.28875, 1.28875, 1.2875, 1.28765, 1.2873, 1.28775, 1.28655, 1.28895, 1.2877, 1.2871, 1.28685, 1.28605, 1.28625, 1.28525, 1.28435, 1.28415, 1.2856, 1.28705, 1.288, 1.28795, 1.28665, 1.2871, 1.2869, 1.28595, 1.28675, 1.28665, 1.28675, 1.28735, 1.2873, 1.28645, 1.28705, 1.28535, 1.2833, 1.28295, 1.28115, 1.28135, 1.28065, 1.2805, 1.2794, 1.27915, 1.2783, 1.2792, 1.27955, 1.2807, 1.28025, 1.283, 1.28305, 1.2818, 1.28135, 1.2821, 1.28185, 1.2813, 1.2234, 1.22825, 1.2293]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('XRP',"$1.2293","DOWN","100","LOW","-0.05","0.06","-2.82","-7.51","-22.54","Strong downward trend","HOLD","0",1.2293)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$1.2293</span>
+                    <span class="row-change" style="color:#3fb950">▲0.09%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('XRP',1.2293,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('XRP',1.2293,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="SOL">
+            <div class="row-left" onclick="openModal('SOL',"$74.8600","DOWN","100","MEDIUM","-5.31","5.65","-3.17","-8.45","-25.35","Strong downward trend","HOLD","0",74.86)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">SOL</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('SOL',"$74.8600","DOWN","100","MEDIUM","-5.31","5.65","-3.17","-8.45","-25.35","Strong downward trend","HOLD","0",74.86)">
+                <canvas class="sparkline" id="spark_SOL" data-prices="[80.885, 80.885, 80.885, 80.885, 80.885, 80.885, 80.885, 80.885, 80.825, 80.805, 80.82, 80.82, 80.74, 80.905, 80.755, 80.765, 80.785, 80.725, 80.775, 80.715, 80.69, 80.675, 80.745, 80.785, 80.835, 80.755, 80.745, 80.745, 80.745, 80.715, 80.735, 80.75, 80.76, 80.785, 80.795, 80.745, 80.775, 80.69, 80.57, 80.48, 80.37, 80.43, 80.395, 80.39, 80.325, 80.285, 80.085, 80.165, 80.175, 80.235, 80.355, 80.32, 80.235, 80.14, 80.175, 80.19, 80.175, 74.835, 74.835, 74.86]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('SOL',"$74.8600","DOWN","100","MEDIUM","-5.31","5.65","-3.17","-8.45","-25.35","Strong downward trend","HOLD","0",74.86)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$74.8600</span>
+                    <span class="row-change" style="color:#3fb950">▲0.03%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('SOL',74.86,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('SOL',74.86,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="LINK">
+            <div class="row-left" onclick="openModal('LINK',"$8.3965","DOWN","100","MEDIUM","-0.53","0.56","-4.1","-10.94","-32.83","Strong downward trend","HOLD","0",8.3965)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">LINK</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('LINK',"$8.3965","DOWN","100","MEDIUM","-0.53","0.56","-4.1","-10.94","-32.83","Strong downward trend","HOLD","0",8.3965)">
+                <canvas class="sparkline" id="spark_LINK" data-prices="[8.9965, 8.9965, 8.9965, 8.9965, 8.9965, 8.9965, 8.9965, 8.995, 8.994, 8.9925, 8.992, 8.9805, 8.994, 8.987, 8.983, 8.983, 8.9795, 8.9835, 8.9765, 8.9715, 8.972, 8.9835, 8.9895, 8.993, 8.9825, 8.986, 8.9875, 8.9865, 8.9845, 8.992, 8.991, 8.994, 8.993, 8.9955, 8.9895, 8.995, 8.9845, 8.964, 8.951, 8.9465, 8.9445, 8.9445, 8.937, 8.931, 8.9205, 8.9065, 8.914, 8.9175, 8.9235, 8.924, 8.941, 8.937, 8.9285, 8.9165, 8.92, 8.9225, 8.92, 8.3925, 8.391, 8.3965]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('LINK',"$8.3965","DOWN","100","MEDIUM","-0.53","0.56","-4.1","-10.94","-32.83","Strong downward trend","HOLD","0",8.3965)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$8.3965</span>
+                    <span class="row-change" style="color:#3fb950">▲0.07%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('LINK',8.3965,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('LINK',8.3965,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="HBAR">
+            <div class="row-left" onclick="openModal('HBAR',"$0.08704","DOWN","100","MEDIUM","-0.0","0.0","-3.31","-8.83","-26.5","Strong downward trend","HOLD","0",0.087035)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">HBAR</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('HBAR',"$0.08704","DOWN","100","MEDIUM","-0.0","0.0","-3.31","-8.83","-26.5","Strong downward trend","HOLD","0",0.087035)">
+                <canvas class="sparkline" id="spark_HBAR" data-prices="[0.09149, 0.09149, 0.09149, 0.09149, 0.09149, 0.09149, 0.09149, 0.09148, 0.091555, 0.091465, 0.091665, 0.09164, 0.091735, 0.091585, 0.09144, 0.0915, 0.09139, 0.091285, 0.0912, 0.09097, 0.091, 0.091165, 0.091295, 0.09132, 0.09129, 0.091235, 0.09131, 0.091315, 0.09148, 0.091555, 0.09155, 0.09161, 0.0917, 0.091735, 0.091655, 0.09173, 0.091645, 0.09158, 0.091545, 0.091435, 0.091575, 0.09163, 0.091455, 0.091555, 0.09142, 0.091245, 0.091405, 0.09143, 0.09154, 0.091505, 0.09164, 0.09155, 0.091535, 0.09152, 0.09149, 0.091515, 0.0915, 0.087065, 0.08701, 0.087035]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('HBAR',"$0.08704","DOWN","100","MEDIUM","-0.0","0.0","-3.31","-8.83","-26.5","Strong downward trend","HOLD","0",0.087035)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$0.08704</span>
+                    <span class="row-change" style="color:#3fb950">▲0.03%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('HBAR',0.087035,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('HBAR',0.087035,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="XLM">
+            <div class="row-left" onclick="openModal('XLM',"$0.22565","DOWN","100","MEDIUM","-0.01","0.01","-3.28","-8.75","-26.26","Strong downward trend","HOLD","0",0.2256515)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">XLM</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('XLM',"$0.22565","DOWN","100","MEDIUM","-0.01","0.01","-3.28","-8.75","-26.26","Strong downward trend","HOLD","0",0.2256515)">
+                <canvas class="sparkline" id="spark_XLM" data-prices="[0.239703, 0.239703, 0.239703, 0.239703, 0.239703, 0.239703, 0.239703, 0.2379005, 0.2379745, 0.2374995, 0.237846, 0.237156, 0.237138, 0.235478, 0.235983, 0.236369, 0.236323, 0.235703, 0.235384, 0.2357045, 0.2355505, 0.236731, 0.2370845, 0.236889, 0.2366745, 0.2361985, 0.2363655, 0.23705, 0.2379745, 0.237516, 0.23704, 0.2385065, 0.23764, 0.237121, 0.236397, 0.2368845, 0.2360345, 0.2361345, 0.236094, 0.2357925, 0.2363715, 0.236675, 0.235774, 0.236673, 0.236845, 0.2363115, 0.2366295, 0.236642, 0.23595, 0.235449, 0.2362495, 0.2360935, 0.236133, 0.2356605, 0.235336, 0.2350495, 0.235174, 0.2245865, 0.2262625, 0.2256515]" data-up="false"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('XLM',"$0.22565","DOWN","100","MEDIUM","-0.01","0.01","-3.28","-8.75","-26.26","Strong downward trend","HOLD","0",0.2256515)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$0.22565</span>
+                    <span class="row-change" style="color:#f85149">▼0.27%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('XLM',0.2256515,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('XLM',0.2256515,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="ADA">
+            <div class="row-left" onclick="openModal('ADA',"$0.21405","DOWN","100","MEDIUM","-0.01","0.01","-4.13","-11.03","-33.08","Strong downward trend","HOLD","0",0.21405)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">ADA</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('ADA',"$0.21405","DOWN","100","MEDIUM","-0.01","0.01","-4.13","-11.03","-33.08","Strong downward trend","HOLD","0",0.21405)">
+                <canvas class="sparkline" id="spark_ADA" data-prices="[0.22955, 0.22955, 0.22955, 0.22955, 0.22955, 0.22955, 0.22955, 0.22935, 0.22935, 0.22935, 0.22945, 0.2292, 0.2296, 0.2291, 0.22925, 0.22925, 0.22925, 0.22935, 0.2292, 0.2289, 0.22885, 0.22905, 0.22915, 0.22925, 0.2291, 0.22895, 0.229, 0.229, 0.22895, 0.22915, 0.22915, 0.22905, 0.229, 0.22905, 0.22885, 0.22895, 0.2287, 0.22835, 0.2279, 0.2278, 0.2279, 0.22775, 0.22775, 0.22765, 0.22745, 0.2271, 0.22735, 0.2274, 0.22775, 0.2275, 0.22795, 0.22785, 0.2277, 0.2275, 0.22765, 0.22755, 0.22765, 0.21345, 0.21395, 0.21405]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('ADA',"$0.21405","DOWN","100","MEDIUM","-0.01","0.01","-4.13","-11.03","-33.08","Strong downward trend","HOLD","0",0.21405)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$0.21405</span>
+                    <span class="row-change" style="color:#3fb950">▲0.05%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('ADA',0.21405,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('ADA',0.21405,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="DOT">
+            <div class="row-left" onclick="openModal('DOT',"$1.0865","DOWN","100","MEDIUM","-0.06","0.07","-2.57","-6.85","-20.54","Strong downward trend","HOLD","0",1.0865)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">DOT</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('DOT',"$1.0865","DOWN","100","MEDIUM","-0.06","0.07","-2.57","-6.85","-20.54","Strong downward trend","HOLD","0",1.0865)">
+                <canvas class="sparkline" id="spark_DOT" data-prices="[1.1525, 1.1525, 1.1525, 1.1525, 1.1525, 1.1525, 1.1525, 1.1525, 1.1525, 1.1515, 1.1515, 1.151, 1.1505, 1.148, 1.1485, 1.15, 1.15, 1.15, 1.1495, 1.149, 1.149, 1.1505, 1.151, 1.1515, 1.1515, 1.1505, 1.15, 1.1505, 1.1505, 1.152, 1.151, 1.153, 1.1525, 1.153, 1.153, 1.153, 1.153, 1.148, 1.147, 1.147, 1.146, 1.145, 1.145, 1.145, 1.142, 1.139, 1.1415, 1.142, 1.1425, 1.143, 1.146, 1.145, 1.144, 1.142, 1.142, 1.1425, 1.1425, 1.0835, 1.0865, 1.0865]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('DOT',"$1.0865","DOWN","100","MEDIUM","-0.06","0.07","-2.57","-6.85","-20.54","Strong downward trend","HOLD","0",1.0865)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$1.0865</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('DOT',1.0865,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('DOT',1.0865,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="AVAX">
+            <div class="row-left" onclick="openModal('AVAX',"$8.2400","DOWN","100","MEDIUM","-0.59","0.67","-3.18","-8.48","-25.43","Strong downward trend","HOLD","0",8.24)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">AVAX</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('AVAX',"$8.2400","DOWN","100","MEDIUM","-0.59","0.67","-3.18","-8.48","-25.43","Strong downward trend","HOLD","0",8.24)">
+                <canvas class="sparkline" id="spark_AVAX" data-prices="[8.87, 8.87, 8.87, 8.87, 8.87, 8.87, 8.87, 8.88, 8.88, 8.87, 8.865, 8.875, 8.88, 8.875, 8.86, 8.86, 8.86, 8.86, 8.86, 8.855, 8.85, 8.86, 8.86, 8.865, 8.87, 8.86, 8.86, 8.865, 8.865, 8.87, 8.87, 8.88, 8.87, 8.87, 8.87, 8.87, 8.87, 8.845, 8.83, 8.825, 8.82, 8.815, 8.815, 8.81, 8.805, 8.78, 8.79, 8.79, 8.795, 8.8, 8.83, 8.815, 8.815, 8.795, 8.795, 8.795, 8.795, 8.215, 8.24, 8.24]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('AVAX',"$8.2400","DOWN","100","MEDIUM","-0.59","0.67","-3.18","-8.48","-25.43","Strong downward trend","HOLD","0",8.24)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$8.2400</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('AVAX',8.24,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('AVAX',8.24,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="MATIC">
+            <div class="row-left" onclick="openModal('MATIC',"$0.09075","DOWN","45.3","LOW","-0.0","0.0","-1.15","-3.07","-9.21","Trend down but low confidence","HOLD","0",0.09075)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">MATIC</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Trend down but low confidence</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('MATIC',"$0.09075","DOWN","45.3","LOW","-0.0","0.0","-1.15","-3.07","-9.21","Trend down but low confidence","HOLD","0",0.09075)">
+                <canvas class="sparkline" id="spark_MATIC" data-prices="[0.093, 0.093, 0.093, 0.093, 0.093, 0.093, 0.093, 0.09305, 0.09305, 0.09305, 0.09315, 0.09315, 0.09295, 0.0928, 0.0928, 0.0928, 0.0928, 0.0928, 0.0928, 0.09275, 0.09275, 0.09275, 0.09275, 0.0929, 0.09275, 0.09275, 0.09275, 0.09275, 0.09275, 0.09275, 0.09275, 0.09275, 0.09275, 0.09285, 0.09285, 0.09285, 0.09285, 0.09275, 0.0928, 0.0928, 0.09275, 0.0928, 0.0928, 0.0928, 0.09265, 0.0924, 0.0925, 0.0925, 0.09255, 0.09255, 0.09265, 0.09265, 0.09265, 0.09265, 0.0924, 0.0924, 0.09245, 0.0908, 0.0908, 0.09075]" data-up="false"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('MATIC',"$0.09075","DOWN","45.3","LOW","-0.0","0.0","-1.15","-3.07","-9.21","Trend down but low confidence","HOLD","0",0.09075)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$0.09075</span>
+                    <span class="row-change" style="color:#f85149">▼0.06%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('MATIC',0.09075,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('MATIC',0.09075,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="crypto" data-symbol="ATOM">
+            <div class="row-left" onclick="openModal('ATOM',"$1.8440","DOWN","39.53","LOW","-0.04","0.04","-0.87","-2.33","-6.99","Trend down but low confidence","HOLD","0",1.844)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">ATOM</span>
+                    <span class="row-type type-crypto">CRYPTO</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Trend down but low confidence</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('ATOM',"$1.8440","DOWN","39.53","LOW","-0.04","0.04","-0.87","-2.33","-6.99","Trend down but low confidence","HOLD","0",1.844)">
+                <canvas class="sparkline" id="spark_ATOM" data-prices="[1.8875, 1.8875, 1.8875, 1.8875, 1.8875, 1.8875, 1.8875, 1.893, 1.8905, 1.889, 1.8905, 1.891, 1.892, 1.892, 1.889, 1.889, 1.888, 1.8875, 1.8855, 1.884, 1.8855, 1.887, 1.8875, 1.8875, 1.8885, 1.889, 1.8885, 1.8895, 1.8905, 1.891, 1.8915, 1.8895, 1.8895, 1.8895, 1.8875, 1.8875, 1.8875, 1.881, 1.88, 1.8825, 1.8815, 1.8815, 1.881, 1.8795, 1.878, 1.8735, 1.876, 1.874, 1.88, 1.8795, 1.883, 1.8825, 1.8825, 1.8805, 1.879, 1.879, 1.878, 1.8455, 1.844, 1.844]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('ATOM',"$1.8440","DOWN","39.53","LOW","-0.04","0.04","-0.87","-2.33","-6.99","Trend down but low confidence","HOLD","0",1.844)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$1.8440</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('ATOM',1.844,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('ATOM',1.844,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="LMT">
+            <div class="row-left" onclick="openModal('LMT',"$513.43","UP","72.76","MEDIUM","-23.78","30.7","0.91","2.44","7.32","Strong upward trend","HOLD","0",513.4299926757812)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">LMT</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong upward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('LMT',"$513.43","UP","72.76","MEDIUM","-23.78","30.7","0.91","2.44","7.32","Strong upward trend","HOLD","0",513.4299926757812)">
+                <canvas class="sparkline" id="spark_LMT" data-prices="[516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 516.5, 513.4299926757812, 513.4299926757812, 513.4299926757812]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('LMT',"$513.43","UP","72.76","MEDIUM","-23.78","30.7","0.91","2.44","7.32","Strong upward trend","HOLD","0",513.4299926757812)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$513.43</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('LMT',513.4299926757812,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('LMT',513.4299926757812,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="ABTC">
+            <div class="row-left" onclick="openModal('ABTC',"$0.99570","DOWN","100","HIGH","-0.05","0.25","-5.13","-13.68","-41.04","Volatility too high","HOLD","0",0.9957000017166138)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">ABTC</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Volatility too high</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('ABTC',"$0.99570","DOWN","100","HIGH","-0.05","0.25","-5.13","-13.68","-41.04","Volatility too high","HOLD","0",0.9957000017166138)">
+                <canvas class="sparkline" id="spark_ABTC" data-prices="[1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 1.0800000429153442, 0.9957000017166138, 0.9957000017166138, 0.9957000017166138]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('ABTC',"$0.99570","DOWN","100","HIGH","-0.05","0.25","-5.13","-13.68","-41.04","Volatility too high","HOLD","0",0.9957000017166138)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$0.99570</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('ABTC',0.9957000017166138,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('ABTC',0.9957000017166138,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="PFE">
+            <div class="row-left" onclick="openModal('PFE',"$25.5500","UP","33.11","LOW","-0.59","0.88","0.32","0.86","2.57","Trend up but low confidence","HOLD","0",25.549999237060547)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">PFE</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Trend up but low confidence</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('PFE',"$25.5500","UP","33.11","LOW","-0.59","0.88","0.32","0.86","2.57","Trend up but low confidence","HOLD","0",25.549999237060547)">
+                <canvas class="sparkline" id="spark_PFE" data-prices="[25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.6299991607666, 25.549999237060547, 25.549999237060547, 25.549999237060547]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('PFE',"$25.5500","UP","33.11","LOW","-0.59","0.88","0.32","0.86","2.57","Trend up but low confidence","HOLD","0",25.549999237060547)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$25.5500</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('PFE',25.549999237060547,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('PFE',25.549999237060547,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="ORCL">
+            <div class="row-left" onclick="openModal('ORCL',"$244.58","UP","100","HIGH","40.88","66.69","21.61","57.63","172.9","Volatility too high","HOLD","0",244.5800018310547)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">ORCL</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Volatility too high</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('ORCL',"$244.58","UP","100","HIGH","40.88","66.69","21.61","57.63","172.9","Volatility too high","HOLD","0",244.5800018310547)">
+                <canvas class="sparkline" id="spark_ORCL" data-prices="[248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 248.14999389648438, 244.5800018310547, 244.5800018310547, 244.5800018310547]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('ORCL',"$244.58","UP","100","HIGH","40.88","66.69","21.61","57.63","172.9","Volatility too high","HOLD","0",244.5800018310547)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$244.58</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('ORCL',244.5800018310547,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('ORCL',244.5800018310547,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="AAPL">
+            <div class="row-left" onclick="openModal('AAPL',"$315.20","UP","73.68","MEDIUM","2.69","28.02","4.72","12.58","37.75","Strong upward trend","HOLD","0",315.20001220703125)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">AAPL</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong upward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('AAPL',"$315.20","UP","73.68","MEDIUM","2.69","28.02","4.72","12.58","37.75","Strong upward trend","HOLD","0",315.20001220703125)">
+                <canvas class="sparkline" id="spark_AAPL" data-prices="[306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 306.30999755859375, 315.20001220703125, 315.20001220703125, 315.20001220703125]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('AAPL',"$315.20","UP","73.68","MEDIUM","2.69","28.02","4.72","12.58","37.75","Strong upward trend","HOLD","0",315.20001220703125)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$315.20</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('AAPL',315.20001220703125,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('AAPL',315.20001220703125,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="NVDA">
+            <div class="row-left" onclick="openModal('NVDA',"$222.82","DOWN","55.05","MEDIUM","8.57","27.91","-1.34","-3.59","-10.76","Strong downward trend","HOLD","0",222.82000732421875)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">NVDA</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('NVDA',"$222.82","DOWN","55.05","MEDIUM","8.57","27.91","-1.34","-3.59","-10.76","Strong downward trend","HOLD","0",222.82000732421875)">
+                <canvas class="sparkline" id="spark_NVDA" data-prices="[224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 224.36000061035156, 222.82000732421875, 222.82000732421875, 222.82000732421875]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('NVDA',"$222.82","DOWN","55.05","MEDIUM","8.57","27.91","-1.34","-3.59","-10.76","Strong downward trend","HOLD","0",222.82000732421875)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$222.82</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('NVDA',222.82000732421875,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('NVDA',222.82000732421875,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="MSFT">
+            <div class="row-left" onclick="openModal('MSFT',"$441.31","UP","100","MEDIUM","14.32","56.19","8.21","21.88","65.65","Strong upward trend","HOLD","0",441.30999755859375)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">MSFT</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong upward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('MSFT',"$441.31","UP","100","MEDIUM","14.32","56.19","8.21","21.88","65.65","Strong upward trend","HOLD","0",441.30999755859375)">
+                <canvas class="sparkline" id="spark_MSFT" data-prices="[460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 460.5199890136719, 441.30999755859375, 441.30999755859375, 441.30999755859375]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('MSFT',"$441.31","UP","100","MEDIUM","14.32","56.19","8.21","21.88","65.65","Strong upward trend","HOLD","0",441.30999755859375)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$441.31</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('MSFT',441.30999755859375,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('MSFT',441.30999755859375,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="AMZN">
+            <div class="row-left" onclick="openModal('AMZN',"$256.52","DOWN","95.8","MEDIUM","-17.48","18.47","-0.48","-1.28","-3.83","Strong downward trend","HOLD","0",256.5199890136719)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">AMZN</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong downward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('AMZN',"$256.52","DOWN","95.8","MEDIUM","-17.48","18.47","-0.48","-1.28","-3.83","Strong downward trend","HOLD","0",256.5199890136719)">
+                <canvas class="sparkline" id="spark_AMZN" data-prices="[261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 261.260009765625, 256.5199890136719, 256.5199890136719, 256.5199890136719]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('AMZN',"$256.52","DOWN","95.8","MEDIUM","-17.48","18.47","-0.48","-1.28","-3.83","Strong downward trend","HOLD","0",256.5199890136719)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$256.52</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('AMZN',256.5199890136719,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('AMZN',256.5199890136719,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="JPM">
+            <div class="row-left" onclick="openModal('JPM',"$300.96","DOWN","33.71","MEDIUM","4.23","19.2","-1.52","-4.06","-12.19","Trend down but low confidence","HOLD","0",300.9599914550781)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">JPM</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Trend down but low confidence</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('JPM',"$300.96","DOWN","33.71","MEDIUM","4.23","19.2","-1.52","-4.06","-12.19","Trend down but low confidence","HOLD","0",300.9599914550781)">
+                <canvas class="sparkline" id="spark_JPM" data-prices="[296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 296.5799865722656, 300.9599914550781, 300.9599914550781, 300.9599914550781]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('JPM',"$300.96","DOWN","33.71","MEDIUM","4.23","19.2","-1.52","-4.06","-12.19","Trend down but low confidence","HOLD","0",300.9599914550781)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$300.96</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('JPM',300.9599914550781,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('JPM',300.9599914550781,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="SPY">
+            <div class="row-left" onclick="openModal('SPY',"$759.57","UP","43.36","LOW","4.97","27.99","2.45","6.55","19.64","Trend up but low confidence","HOLD","0",759.5700073242188)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">SPY</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Trend up but low confidence</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('SPY',"$759.57","UP","43.36","LOW","4.97","27.99","2.45","6.55","19.64","Trend up but low confidence","HOLD","0",759.5700073242188)">
+                <canvas class="sparkline" id="spark_SPY" data-prices="[758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 758.5399780273438, 759.5700073242188, 759.5700073242188, 759.5700073242188]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('SPY',"$759.57","UP","43.36","LOW","4.97","27.99","2.45","6.55","19.64","Trend up but low confidence","HOLD","0",759.5700073242188)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$759.57</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('SPY',759.5700073242188,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('SPY',759.5700073242188,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div>
+        <div class="asset-row" data-decision="HOLD" data-type="stock" data-symbol="QQQ">
+            <div class="row-left" onclick="openModal('QQQ',"$746.16","UP","81.41","MEDIUM","10.56","51.22","4.43","11.83","35.48","Strong upward trend","HOLD","0",746.1599731445312)">
+                <div class="row-symbol-wrap">
+                    <span class="row-symbol">QQQ</span>
+                    <span class="row-type type-stock">STOCK</span>
+                    <span style="font-size:8px;color:#58a6ff;background:#58a6ff18;border:1px solid #58a6ff33;padding:1px 5px;border-radius:3px;margin-left:4px;">AI 50.0%</span>
+                </div>
+                <span class="row-reason">Strong upward trend</span>
+            </div>
+            <div class="row-chart-wrap" onclick="openModal('QQQ',"$746.16","UP","81.41","MEDIUM","10.56","51.22","4.43","11.83","35.48","Strong upward trend","HOLD","0",746.1599731445312)">
+                <canvas class="sparkline" id="spark_QQQ" data-prices="[742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 742.739990234375, 746.1599731445312, 746.1599731445312, 746.1599731445312]" data-up="true"></canvas>
+            </div>
+            <div class="row-right">
+                <div onclick="openModal('QQQ',"$746.16","UP","81.41","MEDIUM","10.56","51.22","4.43","11.83","35.48","Strong upward trend","HOLD","0",746.1599731445312)" style="cursor:pointer;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+                    <span class="row-price">$746.16</span>
+                    <span class="row-change" style="color:#3fb950">▲0.00%</span>
+                    <span class="row-signal" style="color:#f9a825;background:#f9a82522;border:1px solid #f9a825">HOLD</span>
+                </div>
+                <div class="trade-btns">
+                    <button class="trade-btn buy-btn" onclick="event.stopPropagation();openTradeModal('QQQ',746.1599731445312,'BUY')">BUY</button>
+                    <button class="trade-btn sell-btn" onclick="event.stopPropagation();openTradeModal('QQQ',746.1599731445312,'SELL')">SELL</button>
+                </div>
+            </div>
+        </div></div>
+    </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detail-modal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+        <button class="modal-close" onclick="document.getElementById('detail-modal').classList.remove('open')">✕</button>
+        <div style="margin-bottom:20px;">
+            <div class="modal-symbol" id="m-symbol"></div>
+            <div class="modal-price" id="m-price"></div>
+            <div id="m-signal"></div>
+        </div>
+        <div id="m-rows"></div>
+    </div>
+</div>
+
+<!-- TRADE MODAL -->
+<div class="modal-overlay" id="trade-modal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+        <button class="modal-close" onclick="document.getElementById('trade-modal').classList.remove('open')">✕</button>
+        <div class="trade-modal-title" id="t-title"></div>
+        <div class="trade-modal-price" id="t-price-label"></div>
+        <div class="toggle-wrap">
+            <button class="toggle-opt active" id="toggle-usd" onclick="setMode('usd')">$ DOLLARS</button>
+            <button class="toggle-opt" id="toggle-units" onclick="setMode('units')">SHARES / COINS</button>
+        </div>
+        <div class="trade-input-wrap">
+            <label class="trade-input-label" id="t-input-label">AMOUNT (USD)</label>
+            <input class="trade-input" type="number" id="t-amount" placeholder="0.00" oninput="updatePreview()">
+        </div>
+        <div class="trade-preview" id="t-preview">Enter an amount to see preview</div>
+        <button class="trade-submit" id="t-submit" onclick="submitTrade()"></button>
+        <div class="trade-result" id="t-result"></div>
+    </div>
+</div>
+
+<!-- WALLET MODAL -->
+<div class="modal-overlay" id="wallet-modal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal wallet-modal">
+        <button class="modal-close" onclick="document.getElementById('wallet-modal').classList.remove('open')">✕</button>
+        <div class="wallet-total">$1,000,000.00</div>
+        <div class="wallet-sub">Total Portfolio Value</div>
+        <div class="wallet-stats">
+            <div class="wallet-stat"><div class="wallet-stat-label">CASH</div><div class="wallet-stat-value" style="color:#58a6ff">$1,000,000.00</div></div>
+            <div class="wallet-stat"><div class="wallet-stat-label">INVESTED</div><div class="wallet-stat-value" style="color:#f9a825">$0.00</div></div>
+            <div class="wallet-stat"><div class="wallet-stat-label">GAIN / LOSS</div><div class="wallet-stat-value" style="color:#3fb950">+$0.00</div></div>
+        </div>
+        <div class="section-title">POSITIONS</div>
+        <div><div style="color:#484f58;font-size:12px;padding:16px 0;text-align:center;">No positions yet. Start trading!</div></div>
+        <div class="section-title">RECENT TRADES</div>
+        <div><div style="color:#484f58;font-size:12px;padding:8px 0;text-align:center;">No trades yet.</div></div>
+    </div>
+</div>
+
+<script>
+var tradeSymbol='',tradePrice=0,tradeAction='',tradeMode='usd';
+function filterCards(filter,btn){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    if(btn)btn.classList.add('active');
+    document.querySelectorAll('.asset-row').forEach(row=>{
+        if(filter==='all')row.style.display='';
+        else if(filter==='crypto'||filter==='stock')
+            row.style.display=row.dataset.type===filter?'':'none';
+        else row.style.display=row.dataset.decision.includes(filter)?'':'none';
+    });
+}
+function searchCards(val){
+    val=val.toUpperCase();
+    document.querySelectorAll('.asset-row').forEach(row=>{
+        row.style.display=row.dataset.symbol.includes(val)?'':'none';
+    });
+}
+function openModal(symbol,price,trend,confidence,risk,momentum,volatility,week,month,year,reason,decision,score,rawPrice){
+    document.getElementById('m-symbol').textContent=symbol;
+    document.getElementById('m-price').textContent=price;
+    var dc=decision.includes('BUY')?'#3fb950':decision.includes('SELL')?'#f85149':'#f9a825';
+    var db=decision.includes('BUY')?'#3fb95022':decision.includes('SELL')?'#f8514922':'#f9a82522';
+    document.getElementById('m-signal').innerHTML='<span class="modal-signal" style="color:'+dc+';background:'+db+';border:1px solid '+dc+'">'+decision+'</span><span style="font-size:11px;color:#8b949e;margin-left:10px;">SCORE '+score+'</span>';
+    var rows=[['TREND',trend],['SIGNAL STRENGTH',confidence+'%'],['RISK',risk],['MOMENTUM',momentum],['VOLATILITY',volatility],['1 WEEK',week+'%'],['1 MONTH',month+'%'],['1 YEAR',year+'%'],['REASON',reason]];
+    document.getElementById('m-rows').innerHTML=rows.map(r=>'<div class="modal-row"><span class="modal-label">'+r[0]+'</span><span class="modal-value">'+r[1]+'</span></div>').join('');
+    document.getElementById('detail-modal').classList.add('open');
+}
+function openTradeModal(symbol,price,action){
+    tradeSymbol=symbol;tradePrice=price;tradeAction=action;tradeMode='usd';
+    document.getElementById('t-title').textContent=action+' '+symbol;
+    document.getElementById('t-price-label').textContent='Current Price: $'+price.toLocaleString();
+    document.getElementById('t-submit').textContent=action+' '+symbol;
+    document.getElementById('t-submit').className='trade-submit trade-submit-'+action.toLowerCase();
+    document.getElementById('t-amount').value='';
+    document.getElementById('t-preview').textContent='Enter an amount to see preview';
+    document.getElementById('t-result').style.display='none';
+    document.getElementById('toggle-usd').classList.add('active');
+    document.getElementById('toggle-units').classList.remove('active');
+    document.getElementById('t-input-label').textContent='AMOUNT (USD)';
+    document.getElementById('t-amount').placeholder='0.00';
+    document.getElementById('trade-modal').classList.add('open');
+}
+function setMode(mode){
+    tradeMode=mode;
+    document.getElementById('toggle-usd').classList.toggle('active',mode==='usd');
+    document.getElementById('toggle-units').classList.toggle('active',mode==='units');
+    document.getElementById('t-input-label').textContent=mode==='usd'?'AMOUNT (USD)':'SHARES / COINS';
+    document.getElementById('t-amount').placeholder=mode==='usd'?'0.00':'0.000000';
+    document.getElementById('t-amount').value='';
+    document.getElementById('t-preview').textContent='Enter an amount to see preview';
+}
+function updatePreview(){
+    var val=parseFloat(document.getElementById('t-amount').value);
+    if(!val||val<=0){document.getElementById('t-preview').textContent='Enter an amount to see preview';return;}
+    var usd=tradeMode==='usd'?val:val*tradePrice;
+    var units=tradeMode==='usd'?val/tradePrice:val;
+    document.getElementById('t-preview').innerHTML='<span style="color:#e6edf3">'+tradeAction+' <strong>'+units.toFixed(6)+' '+tradeSymbol+'</strong> for <strong>$'+usd.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+'</strong></span>';
+}
+function submitTrade(){
+    var val=parseFloat(document.getElementById('t-amount').value);
+    if(!val||val<=0){showResult('Please enter a valid amount.',false);return;}
+    var params='symbol='+encodeURIComponent(tradeSymbol)+'&price='+tradePrice+'&action='+tradeAction+'&mode='+tradeMode+'&amount='+val;
+    fetch('http://localhost:8080/trade?'+params).then(r=>r.json()).then(data=>{
+        showResult(data.message,data.success);
+        if(data.success)setTimeout(()=>location.reload(),1500);
+    }).catch(()=>showResult('Server not running. Start server.py first.',false));
+}
+function showResult(msg,success){
+    var el=document.getElementById('t-result');
+    el.textContent=msg;el.style.display='block';
+    el.style.background=success?'#3fb95022':'#f8514922';
+    el.style.color=success?'#3fb950':'#f85149';
+    el.style.border='1px solid '+(success?'#3fb950':'#f85149');
+}
+document.querySelectorAll('.sparkline').forEach(canvas=>{
+    var prices=JSON.parse(canvas.dataset.prices.replace(/&quot;/g,'"'));
+    if(!prices||prices.length<2)return;
+    var isUp=canvas.dataset.up==='true';
+    var color=isUp?'#3fb950':'#f85149';
+    var colorDim=isUp?'#3fb95025':'#f8514925';
+    canvas.width=90;canvas.height=36;
+    var ctx=canvas.getContext('2d');
+    var min=Math.min(...prices),max=Math.max(...prices);
+    var range=max-min||1;
+    ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=1.5;
+    prices.forEach((p,i)=>{
+        var x=(i/(prices.length-1))*90;
+        var y=36-((p-min)/range)*(36-6)-3;
+        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    ctx.lineTo(90,36);ctx.lineTo(0,36);ctx.closePath();
+    ctx.fillStyle=colorDim;ctx.fill();
+});
+</script>
+</body>
+</html>

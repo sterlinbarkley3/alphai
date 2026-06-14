@@ -1,0 +1,172 @@
+
+  Logging today's AI signals...
+  Logged 2 signals for 2026-06-03:
+    🔴 BTC    STRONG SELL   @ $65,396.8906  (65.08% confidence)
+    🔴 ATOM   SELL          @ $1.8720  (57.9% confidence)
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 12
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  12
+  Graded (conclusive):   0
+  Pending grading:       12
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Logged 5 signals for 2026-06-04:
+    🔴 BTC    SELL          @ $65,010.6992  (64.11% confidence)
+    🔴 LINK   SELL          @ $8.1510  (55.72% confidence)
+    🔴 DOT    SELL          @ $1.0870  (58.49% confidence)
+    🔴 ATOM   SELL          @ $1.8570  (60.76% confidence)
+    🟢 ORCL   BUY           @ $230.3300  (56.75% confidence)
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 17
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  17
+  Graded (conclusive):   0
+  Pending grading:       17
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Already logged 5 signals for 2026-06-04. Use --force to re-log.
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 17
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  17
+  Graded (conclusive):   0
+  Pending grading:       17
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  No actionable signals today.
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 17
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  17
+  Graded (conclusive):   0
+  Pending grading:       17
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Logged 2 signals for 2026-06-06:
+    🔴 HBAR   SELL          @ $0.0784  (56.34% confidence)
+    🟢 JPM    BUY           @ $312.3700  (55.64% confidence)
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 19
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  19
+  Graded (conclusive):   0
+  Pending grading:       19
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Already logged 2 signals for 2026-06-07. Use --force to re-log.
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 21
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  21
+  Graded (conclusive):   0
+  Pending grading:       21
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Logged 3 signals for 2026-06-09:
+    🔴 HBAR   SELL          @ $0.0795  (55.08% confidence)
+    🔴 ABTC   SELL          @ $0.8528  (60.64% confidence)
+    🟢 JPM    BUY           @ $312.7000  (58.21% confidence)
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 24
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  24
+  Graded (conclusive):   0
+  Pending grading:       24
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Logged 4 signals for 2026-06-10:
+    🔴 HBAR   SELL          @ $0.0785  (58.4% confidence)
+    🔴 AAPL   SELL          @ $291.5800  (60.64% confidence)
+    🔴 SPY    SELL          @ $725.4300  (59.08% confidence)
+    🔴 QQQ    SELL          @ $693.6900  (63.06% confidence)
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 28
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  28
+  Graded (conclusive):   0
+  Pending grading:       28
+
+  No graded signals yet — check back in 10 days.
+============================================================
+
+  Logging today's AI signals...
+  Logged 3 signals for 2026-06-11:
+    🔴 XLM    STRONG SELL   @ $0.1914  (66.47% confidence)
+    🟢 LMT    BUY           @ $548.6800  (59.88% confidence)
+    🔴 MSFT   SELL          @ $390.3400  (62.32% confidence)
+
+  Grading matured signals...
+
+  Graded: 0  Still pending: 31
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  31
+  Graded (conclusive):   0
+  Pending grading:       31
+
+  No graded signals yet — check back in 10 days.
+============================================================

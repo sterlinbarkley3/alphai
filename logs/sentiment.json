@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-06-13T21:30:01.076734",
+  "fear_greed": 18,
+  "fear_greed_label": "Extreme Fear",
+  "fear_greed_norm": -0.64,
+  "assets": {
+    "BTC": {
+      "headline_count": 7,
+      "headline_score": -0.1429,
+      "combined_score": -0.3915,
+      "headlines": [
+        "Google News",
+        "It\u2019s \u2018Over\u2019\u2014Crypto Is Quietly Braced For A Huge BlackRock Bitcoin Price Game-Changer - Forbes",
+        "Opinion: From nothing bitcoin came, and to nothing it will return - The Globe and Mail"
+      ]
+    },
+    "XRP": {
+      "headline_count": 7,
+      "headline_score": 0.0952,
+      "combined_score": -0.2724,
+      "headlines": [
+        "Google News",
+        "\u2018Laugh Now, But One Day XRP Will Power the World,\u2019 Says Ripple CEO as Mastercard Remains a Key Partner - TipRanks",
+        "XRP Vindicated? Ripple CEO Says 'Yes' - U.Today"
+      ]
+    },
+    "SOL": {
+      "headline_count": 7,
+      "headline_score": 0.1429,
+      "combined_score": -0.2485,
+      "headlines": [
+        "Google News",
+        "Solana Crypto 100 - Fortune",
+        "SpaceX stock is coming to Solana on the same day it lists on Nasdaq - CoinDesk"
+      ]
+    },
+    "LINK": {
+      "headline_count": 7,
+      "headline_score": 0.2857,
+      "combined_score": -0.1772,
+      "headlines": [
+        "Google News",
+        "Official FIFA World Cup 2026\u2122 Partner ADI Predictstreet Adopts Chainlink as Exclusive Oracle Infrastructure Powering Prediction Markets for the World's Largest Sporting Event - PR Newswire",
+        "Building the Next Generation of Prediction Markets With the Chainlink Runtime Environment (CRE) - Chainlink Blog"
+      ]
+    },
+    "HBAR": {
+      "headline_count": 7,
+      "headline_score": 0.2857,
+      "combined_score": -0.1772,
+      "headlines": [
+        "Google News",
+        "Hedera (HBAR) Declines 3.3% Amid Broad Crypto Risk-Off - CoinMarketCap",
+        "Hedera (HBAR) - Copper.co Integration - Date (12 June 2026) - TradingView"
+      ]
+    },
+    "XLM": {
+      "headline_count": 7,
+      "headline_score": 0.5714,
+      "combined_score": -0.0343,
+      "headlines": [
+        "Google News",
+        "DTCC to Integrate Tokenized Assets on Stellar XLM - Yahoo Finance",
+        "Stellar's XLM eyes $1.70 rally as Mastercard adopts its stablecoin for 24/7 payments. - Pluang"
+      ]
+    },
+    "ADA": {
+      "headline_count": 7,
+      "headline_score": -0.1429,
+      "combined_score": -0.3915,
+      "headlines": [
+        "Google News",
+        "Is Cardano Too Risky to Own -- or Too Cheap to Ignore? - The Motley Fool",
+        "Is X hurting Cardano? Charles Hoskinson wants the community on Discord instead! - AMBCrypto"
+      ]
+    },
+    "DOT": {
+      "headline_count": 7,
+      "headline_score": 0.1429,
+      "combined_score": -0.2485,
+      "headlines": [
+        "Google News",
+        "Is It Too Late to Buy Polkadot? - Yahoo Finance",
+        "Cardano\u2019s Treasury Panic Misses The Point: \u201cDOT-Style\u201d Pitfall Next? - DailyCoin"
+      ]
+    },
+    "AVAX": {
+      "headline_count": 7,
+      "headline_score": -0.1429,
+      "combined_score": -0.3915,
+      "headlines": [
+        "Google News",
+        "Avalanche Treasury Co set to start trading on Nasdaq as crypto proxy trade evolves - CNBC",
+        "AVAT Debut Brings Avalanche Treasury Strategy to Nasdaq - Yahoo Finance"
+      ]
+    },
+    "ATOM": {
+      "headline_count": 7,
+      "headline_score": 0.4286,
+      "combined_score": -0.1057,
+      "headlines": [
+        "Google News",
+        "ATOM Price Recovers 4%, But the Bigger Cosmos Story Is Just Beginning - Coinpedia",
+        "Cosmos (ATOM) Surges 3.07% Amid Market Rebound and Rotation | Top Stories - CoinMarketCap"
+      ]
+    },
+    "LMT": {
+      "headline_count": 7,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "headlines": [
+        "Google News",
+        "Lockheed Martin cannot say when US allies will get Patriot missiles - Financial Times",
+        "Skunk Works, Divergent Unveil 3D-Printed One-Way Attack Drone - Aviation Week"
+      ]
+    },
+    "ABTC": {
+      "headline_count": 7,
+      "headline_score": -0.1429,
+      "combined_score": -0.1429,
+      "headlines": [
+        "Google News",
+        "American Bitcoin Reports First Quarter 2026 Results - PR Newswire",
+        "Investors lose over $200M on American Bitcoin shares while Eric Trump's stake holds at $70M - Crypto Briefing"
+      ]
+    },
+    "PFE": {
+      "headline_count": 7,
+      "headline_score": 0.4286,
+      "combined_score": 0.4286,
+      "headlines": [
+        "Google News",
+        "Why Pfizer Stock Popped Today - Yahoo Finance",
+        "ORIC gains as Stifel resumes at Buy on upcoming Pfizer readout - Seeking Alpha"
+      ]
+    },
+    "ORCL": {
+      "headline_count": 7,
+      "headline_score": 0.1429,
+      "combined_score": 0.1429,
+      "headlines": [
+        "Google News",
+        "The Biggest Warning Signal Flashing for Oracle Right Now Has Nothing to Do With Sales or Profitability - Yahoo Finance",
+        "Oracle\u2019s stock slides after earnings, as the steep price of AI spooks investors - MarketWatch"
+      ]
+    },
+    "AAPL": {
+      "headline_count": 7,
+      "headline_score": 0.1429,
+      "combined_score": 0.1429,
+      "headlines": [
+        "Google News",
+        "Siri AI Updates Are Here and Apple Stock Is Falling - Barron's",
+        "Sideways Action In Apple Can Still Be Profitable With An Iron Condor - Investor's Business Daily"
+      ]
+    },
+    "NVDA": {
+      "headline_count": 7,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "headlines": [
+        "Google News",
+        "How Nvidia Can Benefit From SpaceX Stock\u2019s Performance - Barron's",
+        "SharonAI Holdings (SHAZ) Stock After NVIDIA AI Deal A Fresh Look At A 11.3x P/B Valuation - Yahoo Finance Singapore"
+      ]
+    },
+    "MSFT": {
+      "headline_count": 7,
+      "headline_score": 0.1429,
+      "combined_score": 0.1429,
+      "headlines": [
+        "Google News",
+        "Microsoft (MSFT) Stock After 17% Year-To-Date Slide Is The Market Overreacting - Yahoo Finance",
+        "Microsoft Just Gave Investors 3 Dates They Can't Afford to Ignore - MarketBeat"
+      ]
+    },
+    "AMZN": {
+      "headline_count": 7,
+      "headline_score": 0.4286,
+      "combined_score": 0.4286,
+      "headlines": [
+        "Google News",
+        "This \u2018Amazon For Travel\u2019 Platform Beat Earnings Expectations. The Stock Is Soaring. - Barron's",
+        "Amazon Stock Could Soar Over the Next Few Years -- and It's Coming From an Unlikely Source - Yahoo Finance"
+      ]
+    },
+    "JPM": {
+      "headline_count": 7,
+      "headline_score": 0.2857,
+      "combined_score": 0.2857,
+      "headlines": [
+        "Google News",
+        "J.P. Morgan names stock sectors primed for serious growth - thestreet.com",
+        "JPMorgan raises Nokia stock price target on AI, cloud growth - Investing.com"
+      ]
+    },
+    "SPY": {
+      "headline_count": 7,
+      "headline_score": 0.1429,
+      "combined_score": 0.1429,
+      "headlines": [
+        "Google News",
+        "Charlie Weber In play, run(s) to Ilan Fernandez - MLB.com",
+        "RFK Jr.'s olive branch isn't winning over his staffers - Politico"
+      ]
+    },
+    "QQQ": {
+      "headline_count": 7,
+      "headline_score": 0.1905,
+      "combined_score": 0.1905,
+      "headlines": [
+        "Google News",
+        "Forget QQQ as the Same Company Sells the Same Nasdaq-100 for 17% Less - 24/7 Wall St.",
+        "First National Bank of Omaha Purchases 30,101 Shares of Invesco QQQ $QQQ - MarketBeat"
+      ]
+    }
+  }
+}
