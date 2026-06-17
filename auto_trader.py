@@ -15,14 +15,14 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-PROJECT_DIR   = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR   = "/root/alphai"
 MODELS_DIR    = os.path.join(PROJECT_DIR, "models")
 OHLCV_DIR     = os.path.join(PROJECT_DIR, "ohlcv")
 PORTFOLIO_FILE = os.path.join(PROJECT_DIR, "logs", "auto_portfolio.json")
 
 STARTING_CASH = 10_000.0
 MAX_POSITIONS = 5        # max number of assets held at once
-MIN_CONFIDENCE = 0.65    # only trade above 65% confidence
+MIN_CONFIDENCE = 0.58    # TEMP: lowered from 0.65 — tighten back up at 20+ trades with 60%+ win rate
 
 CRYPTO = ["BTC","XRP","SOL","LINK","HBAR","XLM","ADA","DOT","AVAX","ATOM"]
 STOCKS = ["LMT","ABTC","PFE","ORCL","AAPL","NVDA","MSFT","AMZN","JPM","SPY","QQQ"]
@@ -435,6 +435,43 @@ def performance_report(portfolio):
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
+
+# ── Regime + Sentiment guards ────────────────────────────────────────────────
+def load_regime():
+    path = os.path.join(PROJECT_DIR, "logs", "regime.json")
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except:
+        print("  [WARN] regime.json not found — defaulting to SIDEWAYS")
+        return {"regime": "SIDEWAYS", "rules": {"buy_signals_blocked": False}}
+
+def load_sentiment():
+    path = os.path.join(PROJECT_DIR, "logs", "sentiment.json")
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except:
+        print("  [WARN] sentiment.json not found — sentiment blocking disabled")
+        return {}
+
+def log_blocked(ticker, action, confidence, reason):
+    import csv
+    row = {
+        "timestamp": datetime.now().isoformat(),
+        "ticker": ticker,
+        "action": action,
+        "confidence": round(float(confidence), 4),
+        "blocked_reason": reason,
+    }
+    path = os.path.join(PROJECT_DIR, "logs", "blocked_signals.csv")
+    write_header = not os.path.exists(path)
+    with open(path, "a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=row.keys())
+        if write_header:
+            w.writeheader()
+        w.writerow(row)
+
 def main():
     if "--report" in sys.argv:
         portfolio = load_portfolio()
@@ -464,6 +501,11 @@ def main():
 
     vix, spy_ret, spy_close, btc_eth = load_macro()
     sentiment_scores, fear_greed     = load_sentiment_scores()
+    regime_data    = load_regime()
+    sentiment_risk = load_sentiment()
+    _regime_label  = regime_data.get("regime", "SIDEWAYS")
+    _buy_blocked   = regime_data.get("rules", {}).get("buy_signals_blocked", False)
+    print(f"  📊 Regime: {_regime_label}  |  BUY blocked: {_buy_blocked}")
     portfolio                        = load_portfolio()
 
     from datetime import date as _date2
@@ -494,6 +536,20 @@ def main():
 
         sent  = sentiment_scores.get(symbol, 0.0)
         signal, prob = get_signal(model, feats, sentiment=sent)
+
+        # ── GUARD 1: Block BUY in BEAR regime ──────────────────────────
+        if signal == "BUY" and _buy_blocked:
+            print(f"  [BLOCKED] {symbol} BUY — BEAR regime ({_regime_label})")
+            log_blocked(symbol, signal, prob, f"BEAR regime")
+            continue
+
+        # ── GUARD 2: Block BUY if sentiment risk HIGH or EXTREME ─────────
+        if signal == "BUY":
+            _risk = sentiment_risk.get(symbol, {}).get("risk", "UNKNOWN")
+            if _risk in ("HIGH", "EXTREME"):
+                print(f"  [BLOCKED] {symbol} BUY — Sentiment risk: {_risk}")
+                log_blocked(symbol, signal, prob, f"Sentiment={_risk}")
+                continue
 
         if signal != "HOLD" and prob >= MIN_CONFIDENCE:
             signals.append({

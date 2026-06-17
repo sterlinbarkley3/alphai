@@ -8,7 +8,7 @@ import os
 import yfinance as yf
 import pandas as pd
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR = "/root/alphai"
 OHLCV_DIR   = os.path.join(PROJECT_DIR, "ohlcv")
 os.makedirs(OHLCV_DIR, exist_ok=True)
 

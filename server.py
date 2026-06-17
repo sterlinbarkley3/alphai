@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Load portfolio functions (assuming portfolio.py exists)
 try:
     import sys
-    sys.path.insert(0, '/Users/mythreeboyz/pythonuh/ai trader')
+    sys.path.insert(0, '/root/alphai')
     from portfolio import buy_asset, sell_asset, get_portfolio_summary
     PORTFOLIO_AVAILABLE = True
 except ImportError:

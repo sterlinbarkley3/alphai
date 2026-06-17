@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
 sentiment.py — Pulls Fear & Greed index and news sentiment for all assets
-Outputs a sentiment score per asset used as a feature in the ML model
+Uses Claude API for AI-powered news scoring
 """
 
 import os, json, requests
 from datetime import datetime
+import anthropic
 
-PROJECT_DIR  = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR    = "/root/alphai"
 SENTIMENT_FILE = os.path.join(PROJECT_DIR, "logs", "sentiment.json")
 
 CRYPTO = ["BTC","XRP","SOL","LINK","HBAR","XLM","ADA","DOT","AVAX","ATOM"]
 STOCKS = ["LMT","ABTC","PFE","ORCL","AAPL","NVDA","MSFT","AMZN","JPM","SPY","QQQ"]
 
-# Map symbols to search terms for news
 SEARCH_TERMS = {
     "BTC":  "Bitcoin", "XRP":  "XRP Ripple", "SOL":  "Solana",
     "LINK": "Chainlink", "HBAR": "Hedera HBAR", "XLM":  "Stellar XLM",
@@ -24,13 +24,7 @@ SEARCH_TERMS = {
     "JPM":  "JPMorgan stock", "SPY":  "S&P 500", "QQQ":  "Nasdaq QQQ",
 }
 
-# ── Fear & Greed Index ───────────────────────────────────────────────────────
-
 def get_fear_greed():
-    """
-    Pulls the crypto Fear & Greed index (0=extreme fear, 100=extreme greed)
-    Free API, no key needed
-    """
     try:
         r = requests.get("https://api.alternative.me/fng/?limit=1", timeout=10)
         data = r.json()
@@ -41,13 +35,7 @@ def get_fear_greed():
         print(f"  Fear & Greed error: {e}")
         return 50, "Neutral"
 
-# ── News sentiment ───────────────────────────────────────────────────────────
-
 def get_news_headlines(symbol):
-    """
-    Pulls recent headlines from Google News RSS
-    No API key needed
-    """
     import re as re2
     search = SEARCH_TERMS.get(symbol, symbol)
     try:
@@ -59,82 +47,87 @@ def get_news_headlines(symbol):
     except Exception as e:
         return []
 
-def score_headlines(headlines):
-    """
-    Simple keyword-based sentiment scoring
-    Returns score from -1.0 (very negative) to +1.0 (very positive)
-    """
+def score_headlines(headlines, symbol):
     if not headlines:
-        return 0.0
+        return 0.0, "LOW"
 
-    positive_words = [
-        "surge", "soar", "rally", "gain", "rise", "jump", "bull", "record",
-        "high", "growth", "profit", "beat", "strong", "buy", "upgrade",
-        "bullish", "breakout", "recover", "up", "positive", "boost",
-        "outperform", "opportunity", "momentum", "milestone"
-    ]
-    negative_words = [
-        "crash", "plunge", "fall", "drop", "loss", "bear", "low", "decline",
-        "sell", "downgrade", "weak", "risk", "fear", "warning", "concern",
-        "bearish", "breakdown", "down", "negative", "trouble", "miss",
-        "underperform", "lawsuit", "fine", "cut", "layoff", "recession"
-    ]
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print(f"  No API key found for {symbol}")
+        return 0.0, "LOW"
 
-    total_score = 0.0
-    for headline in headlines:
-        h = headline.lower()
-        pos = sum(1 for w in positive_words if w in h)
-        neg = sum(1 for w in negative_words if w in h)
-        if pos + neg > 0:
-            total_score += (pos - neg) / (pos + neg)
+    client = anthropic.Anthropic(api_key=api_key)
+    headlines_text = "\n".join(f"- {h}" for h in headlines)
 
-    return round(total_score / len(headlines), 4)
+    prompt = f"""You are a financial news analyst scoring headlines for {symbol}.
 
-# ── Main sentiment engine ────────────────────────────────────────────────────
+Headlines:
+{headlines_text}
+
+Respond with ONLY a JSON object, no markdown, no explanation:
+{{"score": 0.0, "risk_label": "LOW", "reason": "one sentence"}}
+
+score: -1.0 = extremely bearish, 0.0 = neutral, 1.0 = extremely bullish
+risk_label: LOW, MEDIUM, HIGH, or EXTREME"""
+
+    try:
+        message = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=150,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        raw = message.content[0].text.strip()
+        raw = raw.replace("```json", "").replace("```", "").strip()
+        result = json.loads(raw)
+        score = max(-1.0, min(1.0, float(result.get("score", 0.0))))
+        risk_label = result.get("risk_label", "LOW")
+        if risk_label not in ["LOW", "MEDIUM", "HIGH", "EXTREME"]:
+            risk_label = "LOW"
+        return score, risk_label
+    except Exception as e:
+        print(f"  Claude scoring error for {symbol}: {e}")
+        return 0.0, "LOW"
 
 def get_all_sentiment():
-    print("\n  Running sentiment analysis...\n")
+    print("\n  Running sentiment analysis (Claude AI scoring)...\n")
 
-    # Fear & Greed
     fg_score, fg_label = get_fear_greed()
     print(f"  Fear & Greed Index: {fg_score}/100 — {fg_label}")
-
-    # Normalize to -1 to +1
     fg_normalized = round((fg_score - 50) / 50, 4)
 
     results = {
-        "timestamp":       datetime.now().isoformat(),
-        "fear_greed":      fg_score,
-        "fear_greed_label":fg_label,
-        "fear_greed_norm": fg_normalized,
-        "assets":          {}
+        "timestamp":        datetime.now().isoformat(),
+        "fear_greed":       fg_score,
+        "fear_greed_label": fg_label,
+        "fear_greed_norm":  fg_normalized,
+        "assets":           {}
     }
 
-    print(f"\n  {'SYMBOL':<8} {'HEADLINES':<12} {'SENTIMENT':<12} {'SCORE'}")
-    print("  " + "-"*50)
+    print(f"\n  {'SYMBOL':<8} {'HEADLINES':<12} {'RISK':<10} {'SCORE'}")
+    print("  " + "-"*55)
 
     for symbol in CRYPTO + STOCKS:
         headlines = get_news_headlines(symbol)
-        score     = score_headlines(headlines)
-        count     = len(headlines)
+        score, risk_label = score_headlines(headlines, symbol)
+        count = len(headlines)
 
-        # For crypto, also factor in fear & greed
         if symbol in CRYPTO:
             combined = round((score + fg_normalized) / 2, 4)
         else:
             combined = score
 
         icon = "🟢" if combined > 0.1 else "🔴" if combined < -0.1 else "⬜"
-        print(f"  {symbol:<8} {count:<12} {icon} {combined:+.4f}   {headlines[0][:40] + '...' if headlines else 'no headlines'}")
+        risk_icon = {"LOW": "✅", "MEDIUM": "⚠️", "HIGH": "🔴", "EXTREME": "💀"}.get(risk_label, "⬜")
+        print(f"  {symbol:<8} {count:<12} {risk_icon} {risk_label:<8} {icon} {combined:+.4f}")
 
         results["assets"][symbol] = {
             "headline_count": count,
             "headline_score": score,
             "combined_score": combined,
+            "risk_label":     risk_label,
             "headlines":      headlines[:3],
         }
 
-    # Save to disk
     with open(SENTIMENT_FILE, "w") as f:
         json.dump(results, f, indent=2)
 
@@ -142,19 +135,21 @@ def get_all_sentiment():
     return results
 
 def load_sentiment():
-    """Load most recent sentiment scores"""
     if not os.path.exists(SENTIMENT_FILE):
         return None
     with open(SENTIMENT_FILE) as f:
         return json.load(f)
 
 def get_asset_sentiment(symbol):
-    """Get sentiment score for a single asset — returns 0.0 if unavailable"""
     data = load_sentiment()
     if not data:
-        return 0.0, 50
+        return 0.0, 50, "LOW"
     asset = data.get("assets", {}).get(symbol, {})
-    return asset.get("combined_score", 0.0), data.get("fear_greed", 50)
+    return (
+        asset.get("combined_score", 0.0),
+        data.get("fear_greed", 50),
+        asset.get("risk_label", "LOW")
+    )
 
 if __name__ == "__main__":
     get_all_sentiment()

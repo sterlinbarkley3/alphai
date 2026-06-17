@@ -5,7 +5,7 @@ from portfolio import get_portfolio_summary
 from datetime import datetime
 import json, os, pickle, pandas as pd
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR = "/root/alphai"
 MODEL_PATH  = os.path.join(PROJECT_DIR, "models", "model_crypto.pkl")
 FEATURES    = ["ma_cross_pct","momentum","volatility","price_vs_long","score"]
 
@@ -564,7 +564,7 @@ document.querySelectorAll('.sparkline').forEach(canvas=>{{
 </body>
 </html>"""
 
-    with open("/Users/mythreeboyz/pythonuh/ai trader/dashboard.html", "w") as f:
+    with open("/root/alphai/dashboard.html", "w") as f:
         f.write(html)
     print("Dashboard built!")
 

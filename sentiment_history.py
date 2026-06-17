@@ -8,7 +8,7 @@ After 60 days this becomes a training feature
 import os, json, csv
 from datetime import datetime
 
-PROJECT_DIR   = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR   = "/root/alphai"
 SENTIMENT_FILE = os.path.join(PROJECT_DIR, "logs", "sentiment.json")
 HISTORY_FILE   = os.path.join(PROJECT_DIR, "logs", "sentiment_history.csv")
 

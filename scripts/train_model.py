@@ -17,9 +17,9 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import LabelEncoder
 import pickle
 
-DATA_PATH  = "/Users/mythreeboyz/pythonuh/ai trader/training_data.csv"
-MODEL_PATH = "/Users/mythreeboyz/pythonuh/ai trader/model.pkl"
-INFO_PATH  = "/Users/mythreeboyz/pythonuh/ai trader/model_info.json"
+DATA_PATH  = "/root/alphai/training_data.csv"
+MODEL_PATH = "/root/alphai/model.pkl"
+INFO_PATH  = "/root/alphai/model_info.json"
 
 FEATURES = [
     "ma_cross_pct",

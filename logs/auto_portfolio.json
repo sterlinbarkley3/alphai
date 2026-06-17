@@ -1,7 +1,28 @@
 {
-  "cash": 10000.0,
+  "cash": 9500.0,
   "starting_cash": 10000.0,
-  "positions": {},
-  "trades": [],
+  "positions": {
+    "PFE": {
+      "qty": 19.201228,
+      "entry_price": 26.04,
+      "entry_date": "2026-06-16T22:13:59.835063",
+      "cost_basis": 500.0,
+      "signal": "BUY",
+      "confidence": 58.66
+    }
+  },
+  "trades": [
+    {
+      "type": "BUY",
+      "symbol": "PFE",
+      "signal": "BUY",
+      "confidence": 58.66,
+      "qty": 19.201228,
+      "price": 26.04,
+      "invested": 500.0,
+      "date": "2026-06-16",
+      "timestamp": "2026-06-16T22:13:59.835063"
+    }
+  ],
   "created": "2026-06-03T20:31:27.943304"
 }

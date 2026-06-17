@@ -111,11 +111,11 @@
       "signal": "BUY",
       "confidence": 58.23,
       "entry_price": 248.149994,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 184.130005,
+      "price_change": -25.7989,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-02",
@@ -124,11 +124,11 @@
       "signal": "BUY",
       "confidence": 55.65,
       "entry_price": 460.519989,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 390.73999,
+      "price_change": -15.1524,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-03",
@@ -137,11 +137,11 @@
       "signal": "STRONG SELL",
       "confidence": 65.08,
       "entry_price": 65396.890625,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": true,
+      "exit_price": 64421.324219,
+      "price_change": -1.4918,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-03",
@@ -150,11 +150,11 @@
       "signal": "SELL",
       "confidence": 57.9,
       "entry_price": 1.872,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 1.949691,
+      "price_change": 4.1502,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-04",
@@ -163,11 +163,11 @@
       "signal": "SELL",
       "confidence": 64.11,
       "entry_price": 65010.699219,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 65594.34375,
+      "price_change": 0.8978,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-04",
@@ -176,11 +176,11 @@
       "signal": "SELL",
       "confidence": 55.72,
       "entry_price": 8.151,
-      "graded": false,
+      "graded": true,
       "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "exit_price": 8.153,
+      "price_change": 0.0245,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-04",
@@ -189,11 +189,11 @@
       "signal": "SELL",
       "confidence": 58.49,
       "entry_price": 1.087,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": true,
+      "exit_price": 0.993,
+      "price_change": -8.6477,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-04",
@@ -202,11 +202,11 @@
       "signal": "SELL",
       "confidence": 60.76,
       "entry_price": 1.857,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 1.993,
+      "price_change": 7.3236,
+      "grade_date": "2026-06-14"
     },
     {
       "date": "2026-06-04",
@@ -215,11 +215,11 @@
       "signal": "BUY",
       "confidence": 56.75,
       "entry_price": 230.330002,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 192.639999,
+      "price_change": -16.3635,
+      "grade_date": "2026-06-15"
     },
     {
       "date": "2026-06-06",
@@ -475,6 +475,84 @@
       "signal": "SELL",
       "confidence": 56.09,
       "entry_price": 390.339996,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-14",
+      "symbol": "XLM",
+      "asset_type": "CRYPTO",
+      "signal": "SELL",
+      "confidence": 56.42,
+      "entry_price": 0.189372,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-14",
+      "symbol": "ORCL",
+      "asset_type": "STOCK",
+      "signal": "SELL",
+      "confidence": 56.11,
+      "entry_price": 184.130005,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-14",
+      "symbol": "MSFT",
+      "asset_type": "STOCK",
+      "signal": "SELL",
+      "confidence": 55.27,
+      "entry_price": 390.73999,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-15",
+      "symbol": "PFE",
+      "asset_type": "STOCK",
+      "signal": "BUY",
+      "confidence": 59.17,
+      "entry_price": 26.0,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-15",
+      "symbol": "ORCL",
+      "asset_type": "STOCK",
+      "signal": "SELL",
+      "confidence": 58.35,
+      "entry_price": 192.639999,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-15",
+      "symbol": "JPM",
+      "asset_type": "STOCK",
+      "signal": "BUY",
+      "confidence": 57.94,
+      "entry_price": 319.399994,
       "graded": false,
       "correct": null,
       "exit_price": null,

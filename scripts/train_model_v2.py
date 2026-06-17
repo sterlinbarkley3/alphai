@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, classification_report
 
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR = "/root/alphai"
 
 FEATURES = [
     "ma5_cross","ma10_cross","ma20_cross","price_vs_ma20","price_vs_ma50",

@@ -16,7 +16,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-PROJECT_DIR  = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR  = "/root/alphai"
 OHLCV_DIR    = os.path.join(PROJECT_DIR, "ohlcv")
 MODELS_DIR   = os.path.join(PROJECT_DIR, "models")
 TRACKER_FILE = os.path.join(PROJECT_DIR, "logs", "paper_trades.json")

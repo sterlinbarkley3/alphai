@@ -1,0 +1,30 @@
+{
+  "regime": "BULL",
+  "total_score": 3,
+  "timestamp": "2026-06-17T01:01:00.263140+00:00",
+  "signals": {
+    "spy": {
+      "score": 1,
+      "golden_cross": true,
+      "momentum_up": false,
+      "ma50": 726.61,
+      "ma200": 685.18,
+      "spy_price": 750.33
+    },
+    "vix": {
+      "score": 1,
+      "vix": 16.41,
+      "level": "LOW"
+    },
+    "btc": {
+      "score": 1,
+      "btc_price": 65643.99,
+      "btc_ma14": 63442.76,
+      "risk_on": true
+    }
+  },
+  "rules": {
+    "buy_signals_blocked": false,
+    "reason": "Normal signal processing"
+  }
+}

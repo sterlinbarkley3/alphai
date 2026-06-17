@@ -7,7 +7,7 @@ import os, pickle
 import pandas as pd
 import numpy as np
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR = "/root/alphai"
 OHLCV_DIR   = os.path.join(PROJECT_DIR, "ohlcv")
 MODELS_DIR  = os.path.join(PROJECT_DIR, "models")
 

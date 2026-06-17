@@ -170,3 +170,98 @@
 
   No graded signals yet — check back in 10 days.
 ============================================================
+
+  Logging today's AI signals...
+  Logged 3 signals for 2026-06-14:
+    🔴 XLM    SELL          @ $0.1894  (56.42% confidence)
+    🔴 ORCL   SELL          @ $184.1300  (56.11% confidence)
+    🔴 MSFT   SELL          @ $390.7400  (55.27% confidence)
+
+  Grading matured signals...
+  ❌ ORCL   BUY           entry=$248.1500 exit=$184.1300 (-25.80%)
+  ❌ MSFT   BUY           entry=$460.5200 exit=$390.7400 (-15.15%)
+  ✅ BTC    STRONG SELL   entry=$65,396.8906 exit=$64,421.3242 (-1.49%)
+  ❌ ATOM   SELL          entry=$1.8720 exit=$1.9497 (+4.15%)
+  ❌ BTC    SELL          entry=$65,010.6992 exit=$65,594.3438 (+0.90%)
+  ➖ LINK   SELL          entry=$8.1510 exit=$8.1530 (+0.02%)
+  ✅ DOT    SELL          entry=$1.0870 exit=$0.9930 (-8.65%)
+  ❌ ATOM   SELL          entry=$1.8570 exit=$1.9930 (+7.32%)
+
+  Graded: 8  Still pending: 23
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  40
+  Graded (conclusive):   15
+  Pending grading:       24
+
+  Win rate:    60.0%  (9W / 6L)
+  BUY signals: 0.0% win rate (2 total)
+  SELL signals:69.2% win rate (13 total)
+  Crypto:      69.2% win rate (13 signals)
+  Stocks:      0.0% win rate (2 signals)
+
+  Avg gain on wins:  +14.35%
+  Avg loss on losses: -9.87%
+
+  Best call:  AVAX SELL (-24.97%)
+  Worst call: ORCL BUY (-25.80%)
+
+  SYMBOL   SIGNALS   WINS   WIN%     AVG MOVE
+  ---------------------------------------------
+  ADA      1         1      100.0    +24.89%
+  ATOM     3         0      0.0      +5.78%
+  AVAX     1         1      100.0    +24.97%
+  BTC      3         2      66.7     +4.34%
+  DOT      2         2      100.0    +13.07%
+  LINK     1         1      100.0    +12.38%
+  MSFT     1         0      0.0      +15.15%
+  ORCL     1         0      0.0      +25.80%
+  SOL      1         1      100.0    +17.46%
+  XRP      1         1      100.0    +11.13%
+============================================================
+
+  Logging today's AI signals...
+  Logged 3 signals for 2026-06-15:
+    🟢 PFE    BUY           @ $26.0000  (59.17% confidence)
+    🔴 ORCL   SELL          @ $192.6400  (58.35% confidence)
+    🟢 JPM    BUY           @ $319.4000  (57.94% confidence)
+
+  Grading matured signals...
+  ❌ ORCL   BUY           entry=$230.3300 exit=$192.6400 (-16.36%)
+
+  Graded: 1  Still pending: 26
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  43
+  Graded (conclusive):   16
+  Pending grading:       26
+
+  Win rate:    56.2%  (9W / 7L)
+  BUY signals: 0.0% win rate (3 total)
+  SELL signals:69.2% win rate (13 total)
+  Crypto:      69.2% win rate (13 signals)
+  Stocks:      0.0% win rate (3 signals)
+
+  Avg gain on wins:  +14.35%
+  Avg loss on losses: -10.80%
+
+  Best call:  AVAX SELL (-24.97%)
+  Worst call: ORCL BUY (-25.80%)
+
+  SYMBOL   SIGNALS   WINS   WIN%     AVG MOVE
+  ---------------------------------------------
+  ADA      1         1      100.0    +24.89%
+  ATOM     3         0      0.0      +5.78%
+  AVAX     1         1      100.0    +24.97%
+  BTC      3         2      66.7     +4.34%
+  DOT      2         2      100.0    +13.07%
+  LINK     1         1      100.0    +12.38%
+  MSFT     1         0      0.0      +15.15%
+  ORCL     2         0      0.0      +21.08%
+  SOL      1         1      100.0    +17.46%
+  XRP      1         1      100.0    +11.13%
+============================================================

@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 import yfinance as yf
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR = "/root/alphai"
 MODELS_DIR  = os.path.join(PROJECT_DIR, "models")
 OHLCV_DIR   = os.path.join(PROJECT_DIR, "ohlcv")
 

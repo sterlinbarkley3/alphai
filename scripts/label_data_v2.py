@@ -9,8 +9,8 @@ import os, csv
 import yfinance as yf
 import pandas as pd
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
-DATA_DIR    = "/Users/mythreeboyz/pythonuh/ai trader/data"
+PROJECT_DIR = "/root/alphai"
+DATA_DIR    = "/root/alphai/data"
 
 LOOKAHEAD   = 10
 MIN_CHANGE  = 0.5   # only label if price moved at least 0.5% — filters noise

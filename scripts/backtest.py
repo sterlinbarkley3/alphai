@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os, sys, json, argparse
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader/data"
+PROJECT_DIR = "/root/alphai/data"
 sys.path.insert(0, PROJECT_DIR)
 
 SHORT_MA   = 5

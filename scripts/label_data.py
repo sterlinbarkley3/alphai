@@ -7,8 +7,8 @@ Output: training_data.csv
 
 import os, csv
 
-DATA_DIR   = "/Users/mythreeboyz/pythonuh/ai trader/data"
-OUTPUT     = "/Users/mythreeboyz/pythonuh/ai trader/training_data.csv"
+DATA_DIR   = "/root/alphai/data"
+OUTPUT     = "/root/alphai/training_data.csv"
 SHORT_MA   = 5
 LONG_MA    = 20
 MIN_PRICES = 25

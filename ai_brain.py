@@ -10,8 +10,8 @@ Usage:
 import os, sys, pickle
 import pandas as pd
 
-PROJECT_DIR = "/Users/mythreeboyz/pythonuh/ai trader"
-DATA_DIR    = "/Users/mythreeboyz/pythonuh/ai trader/data"
+PROJECT_DIR = "/root/alphai"
+DATA_DIR    = "/root/alphai/data"
 MODEL_PATH  = os.path.join(PROJECT_DIR, "model.pkl")
 
 FEATURES = ["ma_cross_pct","momentum","volatility","price_vs_long","score"]

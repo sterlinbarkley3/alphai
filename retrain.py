@@ -14,7 +14,7 @@ Usage:
 import os, sys, subprocess, json
 from datetime import datetime
 
-PROJECT_DIR  = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR  = "/root/alphai"
 MODELS_DIR   = os.path.join(PROJECT_DIR, "models")
 TRAINING_DIR = os.path.join(PROJECT_DIR, "training")
 SCRIPTS_DIR  = os.path.join(PROJECT_DIR, "scripts")

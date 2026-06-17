@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, classification_report
 
-PROJECT_DIR  = "/Users/mythreeboyz/pythonuh/ai trader"
+PROJECT_DIR  = "/root/alphai"
 TRAINING_DIR = os.path.join(PROJECT_DIR, "training")
 MODELS_DIR   = os.path.join(PROJECT_DIR, "models")
 
