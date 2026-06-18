@@ -1,0 +1,43 @@
+
+=================================================================
+  STERLIN AI BRAIN v2 — v3 MODELS (MACRO FEATURES)
+=================================================================
+
+  Models loaded (v3 — with macro features)
+
+  Loading macro data...
+  VIX today: 16.0  SPY 1d: -0.60%
+
+  Sentiment loaded — Fear & Greed: 22/100
+
+  SYMBOL  TYPE    PRICE          SIGNAL        CONF     RSI    MOM
+  ------------------------------------------------------------------------
+  PFE     STOCK   $26.0400       🟩 BUY         58.7%   47    +1.32%
+  ORCL    STOCK   $188.33        🟥 SELL        57.9%   49    -8.49%
+  JPM     STOCK   $331.14        🟩 BUY         57.4%   79    +5.90%
+  LMT     STOCK   $535.95        ⬜ HOLD        51.5%   54    +1.10%
+  MSFT    STOCK   $393.83        ⬜ HOLD        50.5%   43    -2.37%
+  ABTC    STOCK   $0.8348        ⬜ HOLD        50.1%   28    -2.13%
+  ATOM    CRYPTO  $1.9950        ⬜ HOLD        49.7%   60    -1.38%
+  BTC     CRYPTO  $65,655.97     ⬜ HOLD        49.1%   47    +3.30%
+  AVAX    CRYPTO  $6.8900        ⬜ HOLD        48.6%   26    +3.76%
+  HBAR    CRYPTO  $0.0808        ⬜ HOLD        48.4%   37    +1.88%
+  SOL     CRYPTO  $73.5900       ⬜ HOLD        48.4%   49    +10.13%
+  NVDA    STOCK   $207.41        ⬜ HOLD        47.2%   47    -0.37%
+  XRP     CRYPTO  $1.2181        ⬜ HOLD        47.0%   51    +6.70%
+  ADA     CRYPTO  $0.1728        ⬜ HOLD        46.5%   32    +1.45%
+  XLM     CRYPTO  $0.2180        ⬜ HOLD        46.0%   48    +13.75%
+  LINK    CRYPTO  $8.2840        ⬜ HOLD        45.2%   49    +5.10%
+  DOT     CRYPTO  $1.0150        ⬜ HOLD        44.1%   42    +6.79%
+  AAPL    STOCK   $299.24        ⬜ HOLD        42.0%   40    +2.99%
+  SPY     STOCK   $750.33        ⬜ HOLD        41.5%   50    +1.80%
+  AMZN    STOCK   $246.00        ⬜ HOLD        38.9%   28    +0.74%
+  QQQ     STOCK   $729.86        ⬜ HOLD        34.4%   50    +3.11%
+  ------------------------------------------------------------------------
+
+  Bullish: 2   Bearish: 1   Neutral: 18
+
+  Top picks:
+    PFE — BUY (58.7% confidence, RSI 47)
+    JPM — BUY (57.4% confidence, RSI 79)
+

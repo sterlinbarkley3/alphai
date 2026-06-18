@@ -14,6 +14,21 @@ MODELS_DIR  = os.path.join(PROJECT_DIR, "models")
 CRYPTO = ["BTC","XRP","SOL","LINK","HBAR","XLM","ADA","DOT","AVAX","ATOM"]
 STOCKS = ["LMT","ABTC","PFE","ORCL","AAPL","NVDA","MSFT","AMZN","JPM","SPY","QQQ"]
 
+def load_screener_picks():
+    """Load dynamic picks from screener.py if available."""
+    import json
+    path = os.path.join(PROJECT_DIR, "logs", "screener_picks.json")
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        stocks = data.get("stocks", STOCKS)
+        crypto = data.get("crypto", CRYPTO)
+        print(f"  Screener picks loaded — {len(stocks)} stocks, {len(crypto)} crypto")
+        return stocks, crypto
+    except:
+        print("  No screener picks found — using default 21 assets")
+        return STOCKS, CRYPTO
+
 FEATURES = [
     "ma5_cross","ma10_cross","ma20_cross","price_vs_ma20","price_vs_ma50",
     "mom5","mom10","mom20","vol10","vol20","vol_ratio",
@@ -213,8 +228,9 @@ def main():
     print(f"  Sentiment loaded — Fear & Greed: {fear_greed}/100\n")
 
     results = []
-    for symbol in CRYPTO + STOCKS:
-        is_crypto  = symbol in CRYPTO
+    active_stocks, active_crypto = load_screener_picks()
+    for symbol in active_crypto + active_stocks:
+        is_crypto  = symbol in active_crypto
         model      = crypto_model if is_crypto else stocks_model
         asset_type = "CRYPTO" if is_crypto else "STOCK"
 

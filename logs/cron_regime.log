@@ -1,0 +1,19 @@
+==================================================
+  Alphai Regime Classifier
+  2026-06-17 12:30 UTC
+==================================================
+
+[1/3] Fetching SPY (2y)...
+[2/3] Fetching VIX...
+[3/3] Fetching BTC...
+
+  SPY  : $750.33  |  Golden Cross: True
+  VIX  : 16.34  →  LOW fear
+  BTC  : $64634.66  Risk-On: True
+
+  SCORE  : +3
+  REGIME : BULL
+  BUY BLOCKED : False
+
+  Saved → logs/regime.json
+==================================================

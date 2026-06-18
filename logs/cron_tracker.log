@@ -1,0 +1,47 @@
+
+  Logging today's AI signals...
+  Logged 3 signals for 2026-06-17:
+    🟢 PFE    BUY           @ $26.0400  (58.66% confidence)
+    🔴 ORCL   SELL          @ $188.3300  (57.89% confidence)
+    🟢 JPM    BUY           @ $331.1400  (57.43% confidence)
+
+  Grading matured signals...
+  ❌ HBAR   SELL          entry=$0.0784 exit=$0.0808 (+2.97%)
+  ✅ JPM    BUY           entry=$312.3700 exit=$331.1400 (+6.01%)
+
+  Graded: 2  Still pending: 25
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  46
+  Graded (conclusive):   18
+  Pending grading:       27
+
+  Win rate:    55.6%  (10W / 8L)
+  BUY signals: 25.0% win rate (4 total)
+  SELL signals:64.3% win rate (14 total)
+  Crypto:      64.3% win rate (14 signals)
+  Stocks:      25.0% win rate (4 signals)
+
+  Avg gain on wins:  +13.51%
+  Avg loss on losses: -9.82%
+
+  Best call:  AVAX SELL (-24.97%)
+  Worst call: ORCL BUY (-25.80%)
+
+  SYMBOL   SIGNALS   WINS   WIN%     AVG MOVE
+  ---------------------------------------------
+  ADA      1         1      100.0    +24.89%
+  ATOM     3         0      0.0      +5.78%
+  AVAX     1         1      100.0    +24.97%
+  BTC      3         2      66.7     +4.34%
+  DOT      2         2      100.0    +13.07%
+  HBAR     1         0      0.0      +2.97%
+  JPM      1         1      100.0    +6.01%
+  LINK     1         1      100.0    +12.38%
+  MSFT     1         0      0.0      +15.15%
+  ORCL     2         0      0.0      +21.08%
+  SOL      1         1      100.0    +17.46%
+  XRP      1         1      100.0    +11.13%
+============================================================

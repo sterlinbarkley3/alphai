@@ -1,0 +1,51 @@
+
+  Running sentiment analysis (Claude AI scoring)...
+
+  Fear & Greed Index: 22/100 — Extreme Fear
+
+  SYMBOL   HEADLINES    RISK       SCORE
+  -------------------------------------------------------
+  No API key found for BTC
+  BTC      7            ✅ LOW      🔴 -0.2800
+  No API key found for XRP
+  XRP      7            ✅ LOW      🔴 -0.2800
+  No API key found for SOL
+  SOL      7            ✅ LOW      🔴 -0.2800
+  No API key found for LINK
+  LINK     7            ✅ LOW      🔴 -0.2800
+  No API key found for HBAR
+  HBAR     7            ✅ LOW      🔴 -0.2800
+  No API key found for XLM
+  XLM      7            ✅ LOW      🔴 -0.2800
+  No API key found for ADA
+  ADA      7            ✅ LOW      🔴 -0.2800
+  No API key found for DOT
+  DOT      7            ✅ LOW      🔴 -0.2800
+  No API key found for AVAX
+  AVAX     7            ✅ LOW      🔴 -0.2800
+  No API key found for ATOM
+  ATOM     7            ✅ LOW      🔴 -0.2800
+  No API key found for LMT
+  LMT      7            ✅ LOW      ⬜ +0.0000
+  No API key found for ABTC
+  ABTC     7            ✅ LOW      ⬜ +0.0000
+  No API key found for PFE
+  PFE      7            ✅ LOW      ⬜ +0.0000
+  No API key found for ORCL
+  ORCL     7            ✅ LOW      ⬜ +0.0000
+  No API key found for AAPL
+  AAPL     7            ✅ LOW      ⬜ +0.0000
+  No API key found for NVDA
+  NVDA     7            ✅ LOW      ⬜ +0.0000
+  No API key found for MSFT
+  MSFT     7            ✅ LOW      ⬜ +0.0000
+  No API key found for AMZN
+  AMZN     7            ✅ LOW      ⬜ +0.0000
+  No API key found for JPM
+  JPM      7            ✅ LOW      ⬜ +0.0000
+  No API key found for SPY
+  SPY      7            ✅ LOW      ⬜ +0.0000
+  No API key found for QQQ
+  QQQ      7            ✅ LOW      ⬜ +0.0000
+
+  Saved to logs/sentiment.json

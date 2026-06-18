@@ -1,46 +1,46 @@
 {
-  "timestamp": "2026-06-16T20:43:43.553896",
+  "timestamp": "2026-06-17T08:00:05.072827",
   "fear_greed": 22,
   "fear_greed_label": "Extreme Fear",
   "fear_greed_norm": -0.56,
   "assets": {
     "BTC": {
       "headline_count": 7,
-      "headline_score": 0.7,
-      "combined_score": 0.07,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": -0.28,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "B.C. bitcoin mine plans to transform into AI data centre, regional district says it is already thwarting bylaw - CBC",
-        "A Framework for Valuing Bitcoin Miners as AI Infrastructure - vaneck.com"
+        "Live updates: Bitcoin bottom signal flashes as holders absorbed 125,000 BTC in June - CoinDesk",
+        "BlackRock launches new Bitcoin ETF that generates income using a covered call strategy - The Block"
       ]
     },
     "XRP": {
       "headline_count": 7,
-      "headline_score": 0.8,
-      "combined_score": 0.12,
+      "headline_score": 0.0,
+      "combined_score": -0.28,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Squid adds Ripple's RLUSD stablecoin for cross-chain swaps - The Block",
-        "Ripple invests in Flutterwave, pushing its stablecoin and XRP Ledger into payments across Africa - CoinDesk"
+        "XRP gives back breakout gains, slipping below $1.23 on heavy selling - CoinDesk",
+        "XRP: The Case For The Most Deeply Entrenched Payment Network In Crypto (NYSEARCA:XRP) - Seeking Alpha"
       ]
     },
     "SOL": {
       "headline_count": 7,
-      "headline_score": 0.65,
-      "combined_score": 0.045,
+      "headline_score": 0.0,
+      "combined_score": -0.28,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "'There's room for win-win outcomes': Largest Solana treasury firm Forward looks to acquire smaller SOL DATs - The Block",
+        "Pump.fun activity craters 80% in three months, dragging Solana fees lower as traders rotate into perps - The Block",
         "Solana Iley Anne Husted's Obituary, Visitation &amp; Funeral Information - Thomas Funeral Homes"
       ]
     },
     "LINK": {
       "headline_count": 7,
-      "headline_score": 0.8,
-      "combined_score": 0.12,
+      "headline_score": 0.0,
+      "combined_score": -0.28,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
@@ -50,74 +50,74 @@
     },
     "HBAR": {
       "headline_count": 7,
-      "headline_score": 0.75,
-      "combined_score": 0.095,
+      "headline_score": 0.0,
+      "combined_score": -0.28,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Hedera (HBAR) Rises 3% on ETF Approval and Institutional Access - CoinMarketCap",
+        "HBAR Drops 4.7% Amid Market Pullback, Thin Liquidity - CoinMarketCap",
         "Hedera (HBAR) - Copper.co Integration - Date (12 June 2026) - TradingView"
       ]
     },
     "XLM": {
       "headline_count": 7,
-      "headline_score": 0.8,
-      "combined_score": 0.12,
+      "headline_score": 0.0,
+      "combined_score": -0.28,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Stellar (XLM) Surges 12% on Peace Deal, Tech Breakout - CoinMarketCap",
-        "Bitcoin rallies after Japan rate increase with XLM, INJ, UNI advancing - CoinDesk"
+        "DTCC to Integrate Tokenized Assets on Stellar XLM - Yahoo Finance",
+        "Decoding XLM\u2019s 12% rally as THIS resistance blocks Stellar bulls - AMBCrypto"
       ]
     },
     "ADA": {
       "headline_count": 7,
-      "headline_score": -0.65,
-      "combined_score": -0.605,
-      "risk_label": "HIGH",
+      "headline_score": 0.0,
+      "combined_score": -0.28,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Ethereum, Solana, Cardano Take a Major Hit; Will Altcoin Season Be Witnessed in 2026?\u202c - ZyCrypto",
+        "Justin Bons Wants Charles Hoskinson Out of Cardano \u2014 Community Erupts - Yahoo Finance",
         "Cardano: TVL Breaks $100 Million Threshold - blockchain.news"
       ]
     },
     "DOT": {
       "headline_count": 7,
-      "headline_score": 0.65,
-      "combined_score": 0.045,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": -0.28,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Let Kate Middleton Be Your Style Inspo For Wearing Polka Dots - women.com",
-        "Is It Too Late to Buy Polkadot? - Yahoo Finance"
+        "Is It Too Late to Buy Polkadot? - Yahoo Finance",
+        "Let Kate Middleton Be Your Style Inspo For Wearing Polka Dots - women.com"
       ]
     },
     "AVAX": {
       "headline_count": 7,
-      "headline_score": 0.35,
-      "combined_score": -0.105,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": -0.28,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Is Avalanche Falling Behind? Social Media Debates Heat Up Over AVAX Growth Slowdown - CryptoPotato",
-        "Is Avalanche Falling Behind? Social Media Debates Heat Up Over AVAX Growth Slowdown - CryptoRank"
+        "Avalanche Treasury Co set to start trading on Nasdaq as crypto proxy trade evolves - CNBC",
+        "Is Avalanche Falling Behind? Social Media Debates Heat Up Over AVAX Growth Slowdown - CryptoPotato"
       ]
     },
     "ATOM": {
       "headline_count": 7,
-      "headline_score": 0.85,
-      "combined_score": 0.145,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": -0.28,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Cosmos (ATOM) Surges 3.12% on Multi-Catalyst Rally - CoinMarketCap",
-        "Cosmos (ATOM) Price Prediction 2026, 2027 \u2013 2030: Will ATOM Price Hit $300? - Coinpedia"
+        "Cosmos (ATOM) Price Prediction 2026, 2027 \u2013 2030: Will ATOM Price Hit $300? - Coinpedia",
+        "Cosmos (ATOM) Surges 3.12% on Multi-Catalyst Rally - CoinMarketCap"
       ]
     },
     "LMT": {
       "headline_count": 7,
-      "headline_score": 0.85,
-      "combined_score": 0.85,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
@@ -127,19 +127,19 @@
     },
     "ABTC": {
       "headline_count": 7,
-      "headline_score": -0.35,
-      "combined_score": -0.35,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Crypto &amp; Stocks | The Trumps Made $1B Mining Bitcoin. NVIDIA, Micron, and Marvell Made Even More. - Moomoo",
-        "American Bitcoin Corp Q1 2026 Earnings Call Summary - Yahoo Finance"
+        "American bitcoin director Richard Busch buys $391,500 in stock By Investing.com - Investing.com South Africa",
+        "Crypto &amp; Stocks | The Trumps Made $1B Mining Bitcoin. NVIDIA, Micron, and Marvell Made Even More. - Moomoo"
       ]
     },
     "PFE": {
       "headline_count": 7,
-      "headline_score": 0.45,
-      "combined_score": 0.45,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
@@ -149,9 +149,9 @@
     },
     "ORCL": {
       "headline_count": 7,
-      "headline_score": -0.57,
-      "combined_score": -0.57,
-      "risk_label": "HIGH",
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
         "Oracle Stock Dips Despite Continued Strong Backlog Growth. Should Investors Buy the Stock on the Dip? - Yahoo Finance",
@@ -160,79 +160,79 @@
     },
     "AAPL": {
       "headline_count": 7,
-      "headline_score": 0.35,
-      "combined_score": 0.35,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
         "Prediction: Apple Stock Will Go On a Bull Run in the Second Half of 2026 - The Motley Fool",
-        "Jim Cramer Discusses the Sell-Off in Apple Stock Before SpaceX IPO - Yahoo Finance"
+        "Apple\u2019s AI Plans Are Finally Taking Shape. Here\u2019s What That Means for AAPL Stock. - Yahoo Finance"
       ]
     },
     "NVDA": {
       "headline_count": 7,
-      "headline_score": 0.35,
-      "combined_score": 0.35,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Nvidia Stock: How the Chip Maker Is Trading Today - Barron's",
-        "Nvidia Is Selling Debt for the First Time in Five Years. Why the Stock Is Jumping. - Barron's"
+        "Can Nvidia Stock Reach $743 in the Next 12 Months? - Yahoo Finance",
+        "Marvell Technology (NasdaqGS:MRVL) Gets Nvidia Backing And A $2 Billion Investment - Yahoo Finance"
       ]
     },
     "MSFT": {
       "headline_count": 7,
-      "headline_score": -0.65,
-      "combined_score": -0.65,
-      "risk_label": "HIGH",
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Pension fund claims Microsoft duped investors about AI growth - The Seattle Times",
-        "Microsoft sued by shareholders over expenses, cloud business, AI - Reuters"
+        "Is Microsoft a Deep Value Stock? - Yahoo Finance",
+        "Nvidia CEO Jensen Huang Just Announced Fantastic News to Microsoft Stock Investors - The Motley Fool"
       ]
     },
     "AMZN": {
       "headline_count": 7,
-      "headline_score": 0.75,
-      "combined_score": 0.75,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Amazon Stock Is On The Rise Today: What's Going On? - Benzinga",
-        "Amazon Stock (AMZN) Rises on This AI News - TipRanks"
+        "Are You Pricing Amazon Stock For The Past Or The Future? - Trefis",
+        "Amazon vs. Alphabet: Which Magnificent Stock Is the Better Buy? - The Motley Fool"
       ]
     },
     "JPM": {
       "headline_count": 7,
-      "headline_score": 0.75,
-      "combined_score": 0.75,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "Why JPMorgan Chase Topped the Market on Tuesday - Yahoo Finance",
-        "Zhipu Shares Surge 48% After JPMorgan Raises Price Target - Bloomberg.com"
+        "JPMorgan has stark message for oil, stock investors - thestreet.com",
+        "JPMorgan\u2019s Gimber Sees Value in European Stocks After Oil Shock - Bloomberg.com"
       ]
     },
     "SPY": {
       "headline_count": 7,
-      "headline_score": 0.15,
-      "combined_score": 0.15,
+      "headline_score": 0.0,
+      "combined_score": 0.0,
       "risk_label": "LOW",
       "headlines": [
         "Google News",
         "After O.J.\u2019s Acquittal, Nicole Brown Simpson\u2019s Former Lover Remembered His Chilling Words (Exclusive) - People.com",
-        "Keonte \"Keon\" Murphy - S. Jones Funerals and Cremations"
+        "Shirley S Chorette Obituary June 12, 2026 - Bryant Funeral Homes &amp; Crematory"
       ]
     },
     "QQQ": {
       "headline_count": 7,
-      "headline_score": 0.15,
-      "combined_score": 0.15,
-      "risk_label": "MEDIUM",
+      "headline_score": 0.0,
+      "combined_score": 0.0,
+      "risk_label": "LOW",
       "headlines": [
         "Google News",
-        "QTUM vs. QQQ: Does the Quantum-Computing ETF Beat Just Buying the Nasdaq-100? - Yahoo Finance",
-        "How to hedge your portfolio against the Nasdaq-100 using QQQ put spreads - CNBC"
+        "Is QQQ Still Worth Buying After the Market's Recent Surge? - Yahoo Finance",
+        "Is QQQ Still Worth Buying After the Market's Recent Surge? - The Motley Fool"
       ]
     }
   }

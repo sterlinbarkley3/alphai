@@ -1,7 +1,7 @@
 {
   "regime": "BULL",
   "total_score": 3,
-  "timestamp": "2026-06-17T01:01:00.263140+00:00",
+  "timestamp": "2026-06-17T12:30:04.525370+00:00",
   "signals": {
     "spy": {
       "score": 1,
@@ -13,13 +13,13 @@
     },
     "vix": {
       "score": 1,
-      "vix": 16.41,
+      "vix": 16.34,
       "level": "LOW"
     },
     "btc": {
       "score": 1,
-      "btc_price": 65643.99,
-      "btc_ma14": 63442.76,
+      "btc_price": 64634.66,
+      "btc_ma14": 63483.97,
       "risk_on": true
     }
   },
