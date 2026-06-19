@@ -1,0 +1,49 @@
+======================================================
+  Alphai Dynamic Market Screener
+  2026-06-18 11:45 UTC
+======================================================
+
+[1/4] Scanning stocks...
+  Scanning full US market...
+  Found 275 qualifying stocks today
+
+[2/4] Scanning crypto...
+  Scanning crypto candidates...
+
+[3/4] Getting Claude AI verdict on top stocks...
+  [WARN] AI verdict failed: "Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"
+[4/4] Getting Claude AI verdict on top crypto...
+  [WARN] AI verdict failed: "Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"
+
+── Today's Picks ────────────────────────────────
+  Top stocks  : ['MU', 'RXT', 'TE', 'NBIS', 'QURE', 'INTC', 'ICCM', 'MRVL', 'AMD', 'RKLB']
+  Top crypto  : ['JTO', 'ARB', 'TIA', 'AAVE', 'ETH', 'SHIB', 'BNB', 'OP', 'PYTH', 'WIF']
+
+  Stock details:
+    MU       +2.2%  vol=0.9x  AI:+0  score=1.929
+    RXT      +21.3%  vol=3.0x  AI:+0  score=1.612
+    TE       +4.8%  vol=1.6x  AI:+0  score=1.540
+    NBIS     +6.0%  vol=1.4x  AI:+0  score=1.337
+    QURE     +78.4%  vol=9.7x  AI:+0  score=1.261
+    INTC     +3.5%  vol=0.8x  AI:+0  score=1.259
+    ICCM     +200.5%  vol=60.9x  AI:+0  score=0.958
+    MRVL     +3.9%  vol=1.3x  AI:+0  score=0.843
+    AMD      +1.0%  vol=0.7x  AI:+0  score=0.801
+    RKLB     +3.2%  vol=1.1x  AI:+0  score=0.736
+
+  Crypto details:
+    JTO      mom5=+28.9%  vol=0.9x  AI:+0  score=0.301
+    ARB      mom5=+0.0%  vol=10.0x  AI:+0  score=0.250
+    TIA      mom5=+10.8%  vol=1.1x  AI:+0  score=0.085
+    AAVE     mom5=+9.6%  vol=1.2x  AI:+0  score=0.065
+    ETH      mom5=+3.6%  vol=1.1x  AI:+0  score=0.031
+    SHIB     mom5=-3.4%  vol=0.9x  AI:+0  score=0.028
+    BNB      mom5=-3.5%  vol=1.1x  AI:+0  score=0.026
+    OP       mom5=-0.1%  vol=1.0x  AI:+0  score=0.026
+    PYTH     mom5=-0.9%  vol=0.8x  AI:+0  score=0.021
+    WIF      mom5=+1.0%  vol=1.1x  AI:+0  score=0.021
+
+  Total stocks tracked : 21
+  Total crypto tracked : 20
+  Saved → /root/alphai/logs/screener_picks.json
+======================================================

@@ -41,3 +41,47 @@
     PFE — BUY (58.7% confidence, RSI 47)
     JPM — BUY (57.4% confidence, RSI 79)
 
+
+=================================================================
+  STERLIN AI BRAIN v2 — v3 MODELS (MACRO FEATURES)
+=================================================================
+
+  Models loaded (v3 — with macro features)
+
+  Loading macro data...
+  VIX today: 16.0  SPY 1d: -1.25%
+
+  Sentiment loaded — Fear & Greed: 15/100
+
+  Screener picks loaded — 21 stocks, 20 crypto
+  SYMBOL  TYPE    PRICE          SIGNAL        CONF     RSI    MOM
+  ------------------------------------------------------------------------
+  MSFT    STOCK   $378.91        🟥 SELL        60.4%   32    -4.64%
+  PFE     STOCK   $25.9200       🟩 BUY         60.3%   47    +1.25%
+  XLM     CRYPTO  $0.2290        ⬜ HOLD        57.1%   59    +21.67%
+  ORCL    STOCK   $183.53        ⬜ HOLD        53.8%   43    -8.81%
+  ATOM    CRYPTO  $1.8800        ⬜ HOLD        53.0%   51    -4.96%
+  HBAR    CRYPTO  $0.0807        ⬜ HOLD        52.9%   40    +3.72%
+  JPM     STOCK   $333.46        ⬜ HOLD        52.6%   84    +7.87%
+  ETH     CRYPTO  $1,979.95      ⬜ HOLD        49.8%   28    -2.09%
+  LMT     STOCK   $532.32        ⬜ HOLD        45.2%   49    +1.39%
+  LINK    CRYPTO  $8.0800        ⬜ HOLD        43.1%   46    +2.86%
+  AVAX    CRYPTO  $6.7500        ⬜ HOLD        42.9%   26    +2.82%
+  XRP     CRYPTO  $1.1862        ⬜ HOLD        42.2%   48    +4.78%
+  DOT     CRYPTO  $1.0010        ⬜ HOLD        41.8%   36    +4.67%
+  BTC     CRYPTO  $64,399.99     ⬜ HOLD        41.4%   51    +1.35%
+  ABTC    STOCK   $0.8428        ⬜ HOLD        38.7%   31    +2.78%
+  SOL     CRYPTO  $72.1500       ⬜ HOLD        38.4%   51    +8.09%
+  ADA     CRYPTO  $0.1670        ⬜ HOLD        37.1%   34    -1.67%
+  AMZN    STOCK   $237.50        ⬜ HOLD        33.5%   22    -0.21%
+  QQQ     STOCK   $722.51        ⬜ HOLD        32.2%   46    +4.15%
+  AAPL    STOCK   $295.95        ⬜ HOLD        32.1%   37    +1.50%
+  NVDA    STOCK   $204.65        ⬜ HOLD        29.3%   44    +2.11%
+  SPY     STOCK   $740.96        ⬜ HOLD        29.1%   43    +2.14%
+  ------------------------------------------------------------------------
+
+  Bullish: 1   Bearish: 1   Neutral: 20
+
+  Top picks:
+    PFE — BUY (60.3% confidence, RSI 47)
+

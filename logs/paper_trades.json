@@ -254,11 +254,11 @@
       "signal": "SELL",
       "confidence": 64.41,
       "entry_price": 0.08049,
-      "graded": false,
+      "graded": true,
       "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "exit_price": 0.08071,
+      "price_change": 0.2733,
+      "grade_date": "2026-06-18"
     },
     {
       "date": "2026-06-07",
@@ -267,11 +267,11 @@
       "signal": "SELL",
       "confidence": 62.6,
       "entry_price": 1.674,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 1.88,
+      "price_change": 12.3059,
+      "grade_date": "2026-06-18"
     },
     {
       "date": "2026-06-09",
@@ -592,6 +592,32 @@
       "signal": "BUY",
       "confidence": 57.43,
       "entry_price": 331.140015,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "PFE",
+      "asset_type": "STOCK",
+      "signal": "BUY",
+      "confidence": 60.29,
+      "entry_price": 25.92,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-18",
+      "symbol": "MSFT",
+      "asset_type": "STOCK",
+      "signal": "SELL",
+      "confidence": 60.45,
+      "entry_price": 378.910004,
       "graded": false,
       "correct": null,
       "exit_price": null,

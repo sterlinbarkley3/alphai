@@ -45,3 +45,49 @@
   SOL      1         1      100.0    +17.46%
   XRP      1         1      100.0    +11.13%
 ============================================================
+
+  Logging today's AI signals...
+  Logged 2 signals for 2026-06-18:
+    🟢 PFE    BUY           @ $25.9200  (60.29% confidence)
+    🔴 MSFT   SELL          @ $378.9100  (60.45% confidence)
+
+  Grading matured signals...
+  ➖ HBAR   SELL          entry=$0.0805 exit=$0.0807 (+0.27%)
+  ❌ ATOM   SELL          entry=$1.6740 exit=$1.8800 (+12.31%)
+
+  Graded: 2  Still pending: 27
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  48
+  Graded (conclusive):   19
+  Pending grading:       27
+
+  Win rate:    52.6%  (10W / 9L)
+  BUY signals: 25.0% win rate (4 total)
+  SELL signals:60.0% win rate (15 total)
+  Crypto:      60.0% win rate (15 signals)
+  Stocks:      25.0% win rate (4 signals)
+
+  Avg gain on wins:  +13.51%
+  Avg loss on losses: -10.09%
+
+  Best call:  AVAX SELL (-24.97%)
+  Worst call: ORCL BUY (-25.80%)
+
+  SYMBOL   SIGNALS   WINS   WIN%     AVG MOVE
+  ---------------------------------------------
+  ADA      1         1      100.0    +24.89%
+  ATOM     4         0      0.0      +7.41%
+  AVAX     1         1      100.0    +24.97%
+  BTC      3         2      66.7     +4.34%
+  DOT      2         2      100.0    +13.07%
+  HBAR     1         0      0.0      +2.97%
+  JPM      1         1      100.0    +6.01%
+  LINK     1         1      100.0    +12.38%
+  MSFT     1         0      0.0      +15.15%
+  ORCL     2         0      0.0      +21.08%
+  SOL      1         1      100.0    +17.46%
+  XRP      1         1      100.0    +11.13%
+============================================================

@@ -25,6 +25,7 @@ MAX_POSITIONS = 5        # max number of assets held at once
 MIN_CONFIDENCE = 0.58    # TEMP: lowered from 0.65 — tighten back up at 20+ trades with 60%+ win rate
 
 CRYPTO = ["BTC","XRP","SOL","LINK","HBAR","XLM","ADA","DOT","AVAX","ATOM"]
+INVERSE_ETFS = ["SH","SPXS","PSQ","SQQQ","BITI"]  # only trade in BEAR regime
 STOCKS = ["LMT","ABTC","PFE","ORCL","AAPL","NVDA","MSFT","AMZN","JPM","SPY","QQQ"]
 
 FEATURES = [
@@ -436,6 +437,28 @@ def performance_report(portfolio):
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 
+# ── Earnings calendar guard ─────────────────────────────────────────────────
+def is_earnings_soon(symbol: str, days_ahead: int = 3) -> bool:
+    """Returns True if earnings are within days_ahead days — avoid buying."""
+    try:
+        import yfinance as yf
+        from datetime import date, timedelta
+        cal = yf.Ticker(symbol).calendar
+        if not cal or "Earnings Date" not in cal:
+            return False
+        earnings_dates = cal["Earnings Date"]
+        if not earnings_dates:
+            return False
+        today = date.today()
+        for ed in earnings_dates:
+            if isinstance(ed, date):
+                days_until = (ed - today).days
+                if 0 <= days_until <= days_ahead:
+                    return True
+        return False
+    except:
+        return False
+
 # ── Regime + Sentiment guards ────────────────────────────────────────────────
 def load_regime():
     path = os.path.join(PROJECT_DIR, "logs", "regime.json")
@@ -516,8 +539,27 @@ def main():
 
     # Generate signals for all assets
     signals = []
-    for symbol in CRYPTO + STOCKS:
-        is_crypto  = symbol in CRYPTO
+    # Load dynamic screener picks
+    screener_path = os.path.join(PROJECT_DIR, "logs", "screener_picks.json")
+    try:
+        with open(screener_path) as f:
+            screener_data = json.load(f)
+        active_stocks = screener_data.get("stocks", STOCKS)
+        active_crypto = screener_data.get("crypto", CRYPTO)
+        print(f"  📡 Screener: {len(active_stocks)} stocks, {len(active_crypto)} crypto loaded")
+    except:
+        active_stocks = STOCKS
+        active_crypto = CRYPTO
+        print("  📡 Screener: using default 21 assets")
+
+    # In BEAR regime, add inverse ETFs as priority buys
+    if _buy_blocked:
+        print(f"  🔴 BEAR regime — adding inverse ETFs as BUY candidates")
+        active_stocks = INVERSE_ETFS + active_stocks
+        _buy_blocked = False  # allow buys for inverse ETFs only
+
+    for symbol in active_crypto + active_stocks:
+        is_crypto  = symbol in active_crypto
         model      = crypto_model if is_crypto else stocks_model
         asset_type = "CRYPTO" if is_crypto else "STOCK"
 
@@ -537,6 +579,10 @@ def main():
         sent  = sentiment_scores.get(symbol, 0.0)
         signal, prob = get_signal(model, feats, sentiment=sent)
 
+        # ── GUARD 0: Block inverse ETFs in BULL/SIDEWAYS regime
+        if symbol in INVERSE_ETFS and regime_data.get("regime") != "BEAR":
+            continue
+
         # ── GUARD 1: Block BUY in BEAR regime ──────────────────────────
         if signal == "BUY" and _buy_blocked:
             print(f"  [BLOCKED] {symbol} BUY — BEAR regime ({_regime_label})")
@@ -549,6 +595,13 @@ def main():
             if _risk in ("HIGH", "EXTREME"):
                 print(f"  [BLOCKED] {symbol} BUY — Sentiment risk: {_risk}")
                 log_blocked(symbol, signal, prob, f"Sentiment={_risk}")
+                continue
+
+        # ── GUARD 3: Block BUY within 3 days of earnings ───────────────
+        if signal == "BUY" and symbol not in INVERSE_ETFS:
+            if is_earnings_soon(symbol, days_ahead=3):
+                print(f"  [BLOCKED] {symbol} BUY — earnings within 3 days")
+                log_blocked(symbol, signal, prob, "Earnings soon")
                 continue
 
         if signal != "HOLD" and prob >= MIN_CONFIDENCE:
