@@ -1244,3 +1244,59 @@ ModuleNotFoundError: No module named 'yfinance'
 [2026-06-18 21:54:30] Crypto: Gradient Boosting — 67.92% acc, +17.95% edge
 [2026-06-18 21:54:30] Stocks: Gradient Boosting — 61.51% acc, +13.72% edge
 [2026-06-18 21:54:30] ==================================================
+[2026-06-19 21:00:02] ==================================================
+[2026-06-19 21:00:02] STERLIN AI — AUTO RETRAIN
+[2026-06-19 21:00:02] ==================================================
+[2026-06-19 21:00:02] --- CRYPTO RETRAIN ---
+[2026-06-19 21:00:02] Crypto model age: 1.0 day(s)
+[2026-06-19 21:00:02] Starting: Fetch latest OHLCV data
+[2026-06-19 21:00:02] ==================================================
+[2026-06-19 21:00:02] STERLIN AI — AUTO RETRAIN
+[2026-06-19 21:00:02] ==================================================
+[2026-06-19 21:00:02] --- STOCKS RETRAIN ---
+[2026-06-19 21:00:02] Stocks model age: 1.0 day(s)
+[2026-06-19 21:00:02] Stocks model is fresh. Skipping.
+[2026-06-19 21:00:02] ==================================================
+[2026-06-19 21:00:02] Crypto: Gradient Boosting — 67.92% acc, +17.95% edge
+[2026-06-19 21:00:02] Stocks: Gradient Boosting — 61.51% acc, +13.72% edge
+[2026-06-19 21:00:02] ==================================================
+[2026-06-19 21:00:15] Done: Fetch latest OHLCV data
+[2026-06-19 21:00:15]     Total daily rows:     133,319
+[2026-06-19 21:00:15]     Total hourly rows:    174,611
+[2026-06-19 21:00:15]     Saved to ohlcv/ folder
+[2026-06-19 21:00:15]     Next: run label_data_v3.py
+[2026-06-19 21:00:15] Starting: Generate labeled data
+[2026-06-19 21:32:49] Done: Generate labeled data
+[2026-06-19 21:32:49]     Stock samples:       22,439
+[2026-06-19 21:32:49]     Total:               62,680
+[2026-06-19 21:32:49]     Saved to training/ folder
+[2026-06-19 21:32:49]     Next: run scripts/train_model_v3.py
+[2026-06-19 21:32:49] Starting: Train crypto model
+[2026-06-19 21:53:58] Done: Train crypto model
+[2026-06-19 21:53:58]     Crypto: Gradient Boosting      68.0% acc  +18.0% edge
+[2026-06-19 21:53:58]     Stocks: Gradient Boosting      61.1% acc  +13.3% edge
+[2026-06-19 21:53:58]     Models saved to models/
+[2026-06-19 21:53:58]     Next: run ai_brain_v2.py to see updated signals
+[2026-06-19 21:53:58] Crypto retrain complete.
+[2026-06-19 21:53:58] ==================================================
+[2026-06-19 21:53:58] Crypto: Gradient Boosting — 68.0% acc, +18.04% edge
+[2026-06-19 21:53:58] Stocks: Gradient Boosting — 61.12% acc, +13.32% edge
+[2026-06-19 21:53:58] ==================================================
+[2026-06-20 21:00:01] ==================================================
+[2026-06-20 21:00:01] STERLIN AI — AUTO RETRAIN
+[2026-06-20 21:00:01] ==================================================
+[2026-06-20 21:00:01] --- CRYPTO RETRAIN ---
+[2026-06-20 21:00:01] Crypto model age: 1.0 day(s)
+[2026-06-20 21:00:01] Starting: Fetch latest OHLCV data
+[2026-06-20 21:00:15] Done: Fetch latest OHLCV data
+[2026-06-20 21:00:15]     Total daily rows:     133,329
+[2026-06-20 21:00:15]     Total hourly rows:    174,630
+[2026-06-20 21:00:15]     Saved to ohlcv/ folder
+[2026-06-20 21:00:15]     Next: run label_data_v3.py
+[2026-06-20 21:00:15] Starting: Generate labeled data
+[2026-06-20 21:38:18] Done: Generate labeled data
+[2026-06-20 21:38:18]     Stock samples:       22,441
+[2026-06-20 21:38:18]     Total:               62,675
+[2026-06-20 21:38:18]     Saved to training/ folder
+[2026-06-20 21:38:18]     Next: run scripts/train_model_v3.py
+[2026-06-20 21:38:18] Starting: Train crypto model

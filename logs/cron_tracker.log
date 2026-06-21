@@ -91,3 +91,47 @@
   SOL      1         1      100.0    +17.46%
   XRP      1         1      100.0    +11.13%
 ============================================================
+
+  Logging today's AI signals...
+  Logged 1 signals for 2026-06-19:
+    🔴 BTC    SELL          @ $62,949.8711  (55.96% confidence)
+
+  Grading matured signals...
+  ❌ HBAR   SELL          entry=$0.0795 exit=$0.0806 (+1.28%)
+
+  Graded: 1  Still pending: 25
+
+============================================================
+  PAPER TRADING PERFORMANCE REPORT
+============================================================
+  Total signals logged:  49
+  Graded (conclusive):   20
+  Pending grading:       27
+
+  Win rate:    50.0%  (10W / 10L)
+  BUY signals: 25.0% win rate (4 total)
+  SELL signals:56.2% win rate (16 total)
+  Crypto:      56.2% win rate (16 signals)
+  Stocks:      25.0% win rate (4 signals)
+
+  Avg gain on wins:  +13.51%
+  Avg loss on losses: -9.21%
+
+  Best call:  AVAX SELL (-24.97%)
+  Worst call: ORCL BUY (-25.80%)
+
+  SYMBOL   SIGNALS   WINS   WIN%     AVG MOVE
+  ---------------------------------------------
+  ADA      1         1      100.0    +24.89%
+  ATOM     4         0      0.0      +7.41%
+  AVAX     1         1      100.0    +24.97%
+  BTC      3         2      66.7     +4.34%
+  DOT      2         2      100.0    +13.07%
+  HBAR     2         0      0.0      +2.13%
+  JPM      1         1      100.0    +6.01%
+  LINK     1         1      100.0    +12.38%
+  MSFT     1         0      0.0      +15.15%
+  ORCL     2         0      0.0      +21.08%
+  SOL      1         1      100.0    +17.46%
+  XRP      1         1      100.0    +11.13%
+============================================================

@@ -280,11 +280,11 @@
       "signal": "SELL",
       "confidence": 55.08,
       "entry_price": 0.07955,
-      "graded": false,
-      "correct": null,
-      "exit_price": null,
-      "price_change": null,
-      "grade_date": null
+      "graded": true,
+      "correct": false,
+      "exit_price": 0.08057,
+      "price_change": 1.2822,
+      "grade_date": "2026-06-19"
     },
     {
       "date": "2026-06-09",
@@ -618,6 +618,19 @@
       "signal": "SELL",
       "confidence": 60.45,
       "entry_price": 378.910004,
+      "graded": false,
+      "correct": null,
+      "exit_price": null,
+      "price_change": null,
+      "grade_date": null
+    },
+    {
+      "date": "2026-06-19",
+      "symbol": "BTC",
+      "asset_type": "CRYPTO",
+      "signal": "SELL",
+      "confidence": 55.96,
+      "entry_price": 62949.871094,
       "graded": false,
       "correct": null,
       "exit_price": null,

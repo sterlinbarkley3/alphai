@@ -85,3 +85,44 @@
   Top picks:
     PFE — BUY (60.3% confidence, RSI 47)
 
+
+=================================================================
+  STERLIN AI BRAIN v2 — v3 MODELS (MACRO FEATURES)
+=================================================================
+
+  Models loaded (v3 — with macro features)
+
+  Loading macro data...
+  VIX today: 16.0  SPY 1d: +0.78%
+
+  Sentiment loaded — Fear & Greed: 14/100
+
+  Screener picks loaded — 21 stocks, 20 crypto
+  SYMBOL  TYPE    PRICE          SIGNAL        CONF     RSI    MOM
+  ------------------------------------------------------------------------
+  HBAR    CRYPTO  $0.0806        ⬜ HOLD        60.3%   39    +3.54%
+  ATOM    CRYPTO  $1.8130        ⬜ HOLD        59.5%   48    -8.35%
+  BTC     CRYPTO  $62,949.87     🟥 SELL        56.0%   47    -0.93%
+  JPM     STOCK   $325.22        ⬜ HOLD        54.9%   71    +3.74%
+  XLM     CRYPTO  $0.2320        ⬜ HOLD        54.7%   65    +24.03%
+  XRP     CRYPTO  $1.1479        ⬜ HOLD        53.6%   48    -0.19%
+  LINK    CRYPTO  $8.0050        ⬜ HOLD        52.3%   45    +1.90%
+  ETH     CRYPTO  $1,979.95      ⬜ HOLD        50.8%   28    -2.09%
+  ADA     CRYPTO  $0.1637        ⬜ HOLD        50.3%   33    -3.62%
+  DOT     CRYPTO  $0.9770        ⬜ HOLD        49.5%   33    +2.16%
+  SOL     CRYPTO  $69.7200       ⬜ HOLD        49.2%   52    +1.23%
+  AVAX    CRYPTO  $6.3000        ⬜ HOLD        48.8%   22    -4.03%
+  ORCL    STOCK   $184.29        ⬜ HOLD        47.7%   32    +0.10%
+  PFE     STOCK   $25.2100       ⬜ HOLD        46.8%   37    -3.67%
+  MSFT    STOCK   $379.40        ⬜ HOLD        46.3%   19    -2.80%
+  LMT     STOCK   $510.95        ⬜ HOLD        45.5%   43    -6.88%
+  AAPL    STOCK   $298.01        ⬜ HOLD        43.9%   39    +0.81%
+  SPY     STOCK   $746.74        ⬜ HOLD        38.5%   45    +1.22%
+  AMZN    STOCK   $244.39        ⬜ HOLD        37.5%   31    +1.19%
+  ABTC    STOCK   $0.8504        ⬜ HOLD        35.0%   20    +1.97%
+  NVDA    STOCK   $210.69        ⬜ HOLD        30.7%   50    +2.84%
+  QQQ     STOCK   $740.62        ⬜ HOLD        28.8%   51    +3.28%
+  ------------------------------------------------------------------------
+
+  Bullish: 0   Bearish: 1   Neutral: 21
+

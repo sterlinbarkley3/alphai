@@ -2,18 +2,18 @@
   "version": "v3",
   "crypto": {
     "model": "Gradient Boosting",
-    "accuracy": 67.92,
-    "cv": 66.89,
-    "baseline": 49.97,
-    "edge": 17.95,
-    "trained_on": "2026-06-18T21:54:30.155374"
+    "accuracy": 68.0,
+    "cv": 67.36,
+    "baseline": 49.96,
+    "edge": 18.04,
+    "trained_on": "2026-06-19T21:53:58.572148"
   },
   "stocks": {
     "model": "Gradient Boosting",
-    "accuracy": 61.51,
-    "cv": 61.12,
-    "baseline": 47.78,
-    "edge": 13.72
+    "accuracy": 61.12,
+    "cv": 60.47,
+    "baseline": 47.79,
+    "edge": 13.32
   },
   "features": [
     "ma5_cross",
@@ -46,5 +46,5 @@
     "btc_eth_ratio",
     "rel_strength"
   ],
-  "trained_on": "2026-06-18T21:54:30.155400"
+  "trained_on": "2026-06-19T21:53:58.572164"
 }

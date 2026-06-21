@@ -6,7 +6,7 @@ price targets, portfolio status, and win rate.
 Run anytime: python3 report.py
 """
 
-import os, json, pickle, csv
+import os, json, pickle, csv, re
 import pandas as pd
 import numpy as np
 from datetime import datetime, timezone
@@ -192,14 +192,16 @@ Write like you're explaining to a smart 18-year-old who's new to investing. No j
 
 
 def load_win_rate():
-    """Load win rate from paper trades."""
+    """Load win rate from paper trades (correct structure: dict with 'signals' key)."""
     try:
         with open(os.path.join(LOG_DIR, "paper_trades.json")) as f:
-            trades = json.load(f)
-        graded = [t for t in trades if t.get("result") in ("WIN", "LOSS")]
-        wins   = [t for t in graded if t.get("result") == "WIN"]
-        return len(wins), len(graded), len(trades)
-    except:
+            data = json.load(f)
+        all_signals = data.get("signals", [])
+        graded = [s for s in all_signals if s.get("graded") and s.get("correct") is not None]
+        wins   = [s for s in graded if s.get("correct")]
+        return len(wins), len(graded), len(all_signals)
+    except Exception as e:
+        print(f"  [WARN] Could not load win rate: {e}")
         return 0, 0, 0
 
 
@@ -392,6 +394,10 @@ def run():
     print(f"  CLAUDE'S TAKE — Plain English Summary")
     print(f"{'─'*64}")
     summary = get_ai_summary(signals_data)
+    # Strip markdown formatting (bold, headers) for clean terminal display
+    summary = re.sub(r'\*\*(.*?)\*\*', r'\1', summary)  # remove **bold**
+    summary = re.sub(r'^#+\s*', '', summary, flags=re.MULTILINE)  # remove # headers
+    summary = summary.replace('*', '')  # remove stray asterisks
     # Word wrap at 60 chars
     words = summary.split()
     line  = "  "
